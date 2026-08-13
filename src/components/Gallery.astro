@@ -1,0 +1,16 @@
+---
+import MediaFigure from './MediaFigure.astro';
+
+interface Props {
+  images: string[];
+  altBase: string;
+}
+
+const { images, altBase } = Astro.props;
+---
+
+<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+  {images.map((src, i) => (
+    <MediaFigure src={src} alt={`${altBase} — ${i + 1}`} aspect="4/3" />
+  ))}
+</div>

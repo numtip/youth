@@ -1,0 +1,18 @@
+[
+  {
+    "from": "/youth/index.php/activity/36-youth-biochar-2569",
+    "to": "/activities/2569/biochar-brand"
+  },
+  {
+    "from": "/youth/index.php/activity/37-youth-aquatic-2569",
+    "to": "/activities/2569/aquatic-circular-economy"
+  },
+  {
+    "from": "/youth/index.php/activity/36-youth-biochar-2569/76-activity-biochar-2569-1",
+    "to": "/activities/2569/biochar-brand/activity-1"
+  },
+  {
+    "from": "/youth/index.php/activity/37-youth-aquatic-2569/79-activity-aquatic-2569-1",
+    "to": "/activities/2569/aquatic-circular-economy/activity-1"
+  }
+]

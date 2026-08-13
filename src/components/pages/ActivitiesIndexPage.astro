@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import ProjectCard from '../ProjectCard.astro';
+import { getLocale, localeHref, ui } from '../../i18n';
+import { getPublishedProjects, localizeEntry } from '../../lib/content';
+
+const locale = getLocale(Astro.currentLocale);
+const t = ui[locale];
+const projects = await getPublishedProjects();
+
+const byYear = new Map<number, typeof projects>();
+for (const project of projects) {
+  const group = byYear.get(project.data.year) ?? [];
+  group.push(project);
+  byYear.set(project.data.year, group);
+}
+
+const crumbs = [
+  { label: t.breadcrumbs.home, href: localeHref(locale, '') },
+  { label: t.nav.activities },
+];
+---
+
+<BaseLayout title={t.activities.title} description={t.activities.subtitle}>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <Breadcrumbs items={crumbs} />
+    <h1 class="mt-4 text-3xl font-bold text-stone-900">{t.activities.title}</h1>
+    <p class="mt-2 text-stone-600">{t.activities.subtitle}</p>
+
+    {
+      projects.length === 0 ? (
+        <p class="mt-8 rounded-lg border border-dashed border-stone-300 p-8 text-center text-stone-500">
+          {t.activities.empty}
+        </p>
+      ) : (
+        <div class="mt-8 space-y-10">
+          {[...byYear.entries()].map(([year, yearProjects]) => (
+            <section>
+              <h2 class="mb-4 text-xl font-bold text-stone-800">
+                {t.activities.year} {year}
+              </h2>
+              <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {yearProjects.map((project) => {
+                  const { title, summary } = localizeEntry(locale, project.data);
+                  return (
+                    <ProjectCard
+                      title={title}
+                      summary={summary}
+                      cover={project.data.cover}
+                      alt={title}
+                      year={project.data.year}
+                      href={localeHref(locale, `activities/${project.data.year}/${project.data.slug}`)}
+                    />
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>

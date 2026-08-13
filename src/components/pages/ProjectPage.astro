@@ -1,0 +1,73 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import MediaFigure from '../MediaFigure.astro';
+import ActivityCard from '../ActivityCard.astro';
+import { getLocale, localeHref, ui } from '../../i18n';
+import { getPublishedActivities, localizeEntry } from '../../lib/content';
+
+interface Props {
+  project: CollectionEntry<'projects'>['data'];
+}
+
+const { project } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const t = ui[locale];
+
+const { title, summary } = localizeEntry(locale, project);
+const activities = (await getPublishedActivities()).filter(
+  (a) => a.data.project === project.slug && a.data.year === project.year,
+);
+
+const activitiesHref = localeHref(locale, 'activities');
+const crumbs = [
+  { label: t.breadcrumbs.home, href: localeHref(locale, '') },
+  { label: t.nav.activities, href: activitiesHref },
+  { label: title },
+];
+---
+
+<BaseLayout title={title} description={summary}>
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <Breadcrumbs items={crumbs} />
+
+    <article class="mt-6 grid gap-8 lg:grid-cols-2">
+      <MediaFigure src={project.cover} alt={title} aspect="4/3" class="rounded-xl" />
+      <div>
+        <span class="rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800">
+          {t.activities.year} {project.year}
+        </span>
+        <h1 class="mt-3 text-3xl font-bold text-stone-900">{title}</h1>
+        <p class="mt-4 text-stone-700">{summary}</p>
+        <a href={activitiesHref} class="mt-6 inline-block text-sm font-medium text-emerald-700 hover:underline">
+          ← {t.project.back}
+        </a>
+      </div>
+    </article>
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold text-stone-900">{t.project.activities}</h2>
+      {
+        activities.length === 0 ? (
+          <p class="mt-4 rounded-lg border border-dashed border-stone-300 p-8 text-center text-stone-500">
+            {t.project.empty}
+          </p>
+        ) : (
+          <div class="mt-6 space-y-3">
+            {activities.map((activity) => {
+              const a = localizeEntry(locale, activity.data);
+              return (
+                <ActivityCard
+                  title={a.title}
+                  summary={a.summary}
+                  href={localeHref(locale, `activities/${activity.data.year}/${activity.data.project}/${activity.data.slug}`)}
+                />
+              );
+            })}
+          </div>
+        )
+      }
+    </section>
+  </div>
+</BaseLayout>

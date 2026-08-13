@@ -1,0 +1,29 @@
+---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  aspect?: '4/3' | '16/9';
+}
+
+const { src, alt, class: className = '', aspect = '4/3' } = Astro.props;
+
+// Referenced media may not be present yet. Detect at build time so we can
+// render an accessible CSS placeholder instead of a broken image.
+const clean = src.replace(/^\/+/, '');
+const absolute = join(process.cwd(), 'public', clean);
+const missing = !existsSync(absolute);
+---
+
+<figure class:list={['media-figure', className]} data-aspect={aspect}>
+  {missing ? (
+    <figcaption class="media-placeholder" aria-label={alt}>
+      <span>{alt}</span>
+    </figcaption>
+  ) : (
+    <img src={src} alt={alt} loading="lazy" decoding="async" />
+  )}
+</figure>

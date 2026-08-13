@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLocale, localeHref, ui } from '../../i18n';
+import { getPublishedProjects, getPublishedActivities, localizeEntry } from '../../lib/content';
+
+const locale = getLocale(Astro.currentLocale);
+const t = ui[locale];
+
+const projects = await getPublishedProjects();
+const activities = await getPublishedActivities();
+
+interface SearchItem {
+  type: 'project' | 'activity';
+  title: string;
+  summary: string;
+  href: string;
+}
+
+const items: SearchItem[] = [
+  ...projects.map((p) => {
+    const { title, summary } = localizeEntry(locale, p.data);
+    return {
+      type: 'project' as const,
+      title,
+      summary,
+      href: localeHref(locale, `activities/${p.data.year}/${p.data.slug}`),
+    };
+  }),
+  ...activities.map((a) => {
+    const { title, summary } = localizeEntry(locale, a.data);
+    return {
+      type: 'activity' as const,
+      title,
+      summary,
+      href: localeHref(locale, `activities/${a.data.year}/${a.data.project}/${a.data.slug}`),
+    };
+  }),
+];
+
+const labels = {
+  initial: t.search.initial,
+  empty: t.search.empty,
+  results: t.search.results,
+  project: t.nav.activities,
+  activity: t.activity.details,
+};
+---
+
+<BaseLayout title={t.search.title}>
+  <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="text-3xl font-bold text-stone-900">{t.search.title}</h1>
+
+    <div role="search" class="mt-6">
+      <label for="search-input" class="sr-only">{t.search.placeholder}</label>
+      <input
+        id="search-input"
+        type="search"
+        placeholder={t.search.placeholder}
+        autocomplete="off"
+        class="w-full rounded-lg border border-stone-300 bg-white px-4 py-3 text-stone-900 shadow-sm placeholder:text-stone-400 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-200"
+      />
+    </div>
+
+    <p id="search-count" class="mt-4 text-sm text-stone-500" aria-live="polite">{t.search.initial}</p>
+
+    <ul id="search-results" class="mt-4 space-y-3"></ul>
+  </div>
+</BaseLayout>
+
+<script type="application/json" id="search-data" is:inline set:html={JSON.stringify({ items, labels })}></script>
+<script is:inline>
+  (function () {
+    var dataEl = document.getElementById('search-data');
+    var input = document.getElementById('search-input');
+    var countEl = document.getElementById('search-count');
+    var listEl = document.getElementById('search-results');
+    var data = JSON.parse(dataEl.textContent);
+    var items = data.items;
+    var labels = data.labels;
+
+    function render(query) {
+      var q = query.trim().toLowerCase();
+      listEl.innerHTML = '';
+      if (!q) {
+        countEl.textContent = labels.initial;
+        return;
+      }
+      var matches = items.filter(function (it) {
+        return (it.title + ' ' + it.summary).toLowerCase().indexOf(q) !== -1;
+      });
+      countEl.textContent = labels.results.replace('{count}', String(matches.length));
+      if (matches.length === 0) {
+        var empty = document.createElement('li');
+        empty.textContent = labels.empty;
+        empty.className = 'rounded-lg border border-dashed border-stone-300 p-6 text-center text-stone-500';
+        listEl.appendChild(empty);
+        return;
+      }
+      matches.forEach(function (item) {
+        var li = document.createElement('li');
+        li.className = 'rounded-lg border border-stone-200 bg-white p-4 shadow-sm';
+        var a = document.createElement('a');
+        a.href = item.href;
+        a.className = 'block';
+        var badge = document.createElement('span');
+        badge.className = 'mb-1 inline-block rounded-full bg-stone-100 px-2 py-0.5 text-xs font-semibold text-stone-600';
+        badge.textContent = item.type === 'project' ? labels.project : labels.activity;
+        var title = document.createElement('h3');
+        title.className = 'font-semibold text-stone-900';
+        title.textContent = item.title;
+        var summary = document.createElement('p');
+        summary.className = 'mt-1 text-sm text-stone-600';
+        summary.textContent = item.summary;
+        a.appendChild(badge);
+        a.appendChild(title);
+        a.appendChild(summary);
+        li.appendChild(a);
+        listEl.appendChild(li);
+      });
+    }
+
+    input.addEventListener('input', function () {
+      render(input.value);
+    });
+  })();
+</script>

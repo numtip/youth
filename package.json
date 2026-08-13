@@ -1,0 +1,28 @@
+{
+  "name": "youth-next",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "validate": "npm run validate:content && npm run validate:media",
+    "validate:content": "node scripts/validate-content.mjs",
+    "validate:media": "node scripts/validate-media.mjs",
+    "check": "npm run validate && astro check",
+    "build": "npm run validate && astro build",
+    "preview": "astro preview",
+    "test:smoke": "node scripts/smoke-test.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.2.1",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^26.2.0",
+    "js-yaml": "^5.2.3",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "year": 2569,
+    "slug": "biochar-brand",
+    "title": "ยุวชนอาสาพัฒนาแบรนด์คนเอาถ่าน",
+    "summary": "ยกระดับผลิตภัณฑ์ชีวภาพอินทรีย์สันนาเม็ง ด้วยนวัตกรรมแบรนด์และตลาดดิจิทัล",
+    "cover": "/media/projects/2569/biochar-brand/cover.jpg",
+    "legacyUrls": ["/youth/index.php/activity/36-youth-biochar-2569"],
+    "order": 10,
+    "status": "published"
+  },
+  {
+    "year": 2569,
+    "slug": "aquatic-circular-economy",
+    "title": "ยุวชนอาสานวัตกรรมการผลิตและเพิ่มมูลค่าสัตว์น้ำ",
+    "summary": "นวัตกรรมการผลิตและเพิ่มมูลค่าสัตว์น้ำเพื่อเศรษฐกิจหมุนเวียน ในอำเภอสันทราย จังหวัดเชียงใหม่",
+    "cover": "/media/projects/2569/aquatic-circular-economy/cover.jpg",
+    "legacyUrls": ["/youth/index.php/activity/37-youth-aquatic-2569"],
+    "order": 20,
+    "status": "published"
+  }
+]

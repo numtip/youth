@@ -1,0 +1,35 @@
+---
+import { getLocale, getLocalizedPathname } from '../i18n';
+
+const locale = getLocale(Astro.currentLocale);
+const pathname = Astro.url.pathname;
+const thHref = getLocalizedPathname(pathname, 'th');
+const enHref = getLocalizedPathname(pathname, 'en');
+---
+
+<nav aria-label="Language" class="flex items-center rounded-full border border-stone-300 p-0.5 text-sm font-medium">
+  <a
+    href={thHref}
+    hreflang="th"
+    lang="th"
+    aria-current={locale === 'th' ? 'page' : undefined}
+    class:list={[
+      'rounded-full px-3 py-1 transition-colors',
+      locale === 'th' ? 'bg-emerald-700 text-white' : 'text-stone-600 hover:text-emerald-700',
+    ]}
+  >
+    ไทย
+  </a>
+  <a
+    href={enHref}
+    hreflang="en"
+    lang="en"
+    aria-current={locale === 'en' ? 'page' : undefined}
+    class:list={[
+      'rounded-full px-3 py-1 transition-colors',
+      locale === 'en' ? 'bg-emerald-700 text-white' : 'text-stone-600 hover:text-emerald-700',
+    ]}
+  >
+    EN
+  </a>
+</nav>

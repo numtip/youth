@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import ActivityPage from '../../../../../components/pages/ActivityPage.astro';
+
+export async function getStaticPaths() {
+  const activities = await getCollection('activities', ({ data }) => data.status === 'published');
+  return activities.map((activity) => ({
+    params: {
+      year: String(activity.data.year),
+      project: activity.data.project,
+      activity: activity.data.slug,
+    },
+    props: { id: activity.id },
+  }));
+}
+
+const { id } = Astro.props;
+---
+
+<ActivityPage id={id} />

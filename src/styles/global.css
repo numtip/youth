@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Sarabun", "IBM Plex Sans Thai", "Noto Sans Thai", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-stone-50);
+  color: var(--color-stone-800);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-emerald-600);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 50;
+}
+
+.skip-link:focus {
+  left: 0;
+  background-color: var(--color-emerald-700);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0 0.5rem 0;
+}
+
+/* Media figure: fixed crop with a CSS placeholder when the file is missing */
+.media-figure {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-stone-200);
+  background-image: linear-gradient(135deg, var(--color-stone-200) 25%, var(--color-stone-300) 25%, var(--color-stone-300) 50%, var(--color-stone-200) 50%, var(--color-stone-200) 75%, var(--color-stone-300) 75%);
+  background-size: 20px 20px;
+}
+
+.media-figure[data-aspect="4/3"] {
+  aspect-ratio: 4 / 3;
+}
+
+.media-figure[data-aspect="16/9"] {
+  aspect-ratio: 16 / 9;
+}
+
+.media-figure img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-stone-500);
+}
+
+/* Rendered markdown body (activity details) */
+.md-body {
+  line-height: 1.9;
+  font-size: 1.0625rem;
+}
+
+.md-body p {
+  margin-bottom: 1rem;
+}
+
+.md-body h2,
+.md-body h3 {
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.md-body h2 {
+  font-size: 1.375rem;
+}
+
+.md-body h3 {
+  font-size: 1.125rem;
+}
+
+.md-body ul,
+.md-body ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.md-body ul {
+  list-style: disc;
+}
+
+.md-body ol {
+  list-style: decimal;
+}
+
+.md-body a {
+  color: var(--color-emerald-700);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

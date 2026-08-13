@@ -1,0 +1,17 @@
+---
+import { getLocale, ui } from '../i18n';
+
+const locale = getLocale(Astro.currentLocale);
+const t = ui[locale];
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-12 bg-stone-900 text-stone-300">
+  <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 sm:px-6">
+    <p class="text-sm font-semibold text-white">{t.siteName}</p>
+    <p class="text-sm">{t.footer.tagline}</p>
+    <p class="pt-4 text-xs text-stone-500">
+      © {year} {t.siteName}. {t.footer.rights}
+    </p>
+  </div>
+</footer>

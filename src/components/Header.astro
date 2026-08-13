@@ -1,0 +1,35 @@
+---
+import LangSwitcher from './LangSwitcher.astro';
+import { getLocale, localeHref, ui } from '../i18n';
+
+const locale = getLocale(Astro.currentLocale);
+const t = ui[locale];
+const homeHref = localeHref(locale, '');
+
+const links = [
+  { href: localeHref(locale, 'activities'), label: t.nav.activities },
+  { href: localeHref(locale, 'documents'), label: t.nav.documents },
+  { href: localeHref(locale, 'about'), label: t.nav.about },
+  { href: localeHref(locale, 'contact'), label: t.nav.contact },
+  { href: localeHref(locale, 'search'), label: t.nav.search },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-stone-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3 sm:px-6">
+    <a href={homeHref} class="flex items-center gap-2 text-lg font-bold text-emerald-800">
+      <span aria-hidden="true" class="grid h-9 w-9 place-items-center rounded-lg bg-emerald-600 text-white">ยุ</span>
+      <span>{t.siteName}</span>
+    </a>
+
+    <nav aria-label={t.nav.home} class="order-3 flex w-full flex-wrap items-center gap-x-5 gap-y-1 sm:order-2 sm:w-auto">
+      {links.map((link) => (
+        <a href={link.href} class="text-sm font-medium text-stone-600 transition-colors hover:text-emerald-700">{link.label}</a>
+      ))}
+    </nav>
+
+    <div class="order-2 sm:order-3">
+      <LangSwitcher />
+    </div>
+  </div>
+</header>
