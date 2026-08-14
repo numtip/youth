@@ -26,6 +26,15 @@ The target is a **static-first public website** based on the approach used by [g
 
 Use the repository only as a design and architecture reference. This new project must use current, compatible package releases; do not blindly copy its lockfile or credentials.
 
+## Current status
+
+As of 2026-08-14 the site is live at `https://numtip.github.io/youth/` (GitHub
+Pages preview gate). Years migrated: **2568** (4 projects / 16 activities) and
+**2569** (2 scaffolded projects). Next: **2567** and **2564**.
+
+- Latest status: [`docs/HANDOFF-2026-08-14.md`](docs/HANDOFF-2026-08-14.md)
+- Daily report: [`docs/reports/YOUTH_DAILY_REPORT_2026-08-14.md`](docs/reports/YOUTH_DAILY_REPORT_2026-08-14.md)
+
 ## Start with Cursor
 
 Open `D:\Server\youth-next` in Cursor, then give the agent the contents of [CURSOR_AGENT_PROMPT.md](CURSOR_AGENT_PROMPT.md). The agent should read all files in `docs/blueprint/` before it creates application code.
