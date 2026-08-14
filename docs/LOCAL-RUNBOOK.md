@@ -73,6 +73,41 @@ npm run preview
 
 Serves `dist/` locally (default port 4321). Use `npm run dev` during development and `npm run preview` to sanity-check the static output.
 
+## GitHub Pages preview (acceptance environment)
+
+The public preview is published to GitHub Pages at
+`https://numtip.github.io/youth/` by the `.github/workflows/deploy.yml`
+workflow, which runs the quality gates (`validate`, `check`, `build`,
+`test:smoke`) and then deploys the `dist/` artifact via the official Pages
+Actions. Deploys happen only on `main`; pull requests run the gates without
+deploying.
+
+The same source builds for two targets, selected by environment variables:
+
+| Variable | Local root (default) | GitHub Pages |
+| --- | --- | --- |
+| `SITE_BASE` | `/` (unset) | `/youth/` |
+| `SITE_URL` | (unset — no canonical) | `https://numtip.github.io` |
+
+To reproduce the Pages subpath locally:
+
+```powershell
+$env:SITE_BASE = "/youth/"
+$env:SITE_URL = "https://numtip.github.io"
+npm run build
+npm run test:smoke
+Remove-Item Env:SITE_BASE, Env:SITE_URL
+```
+
+All internal links, `/media/` asset URLs, the language switcher, search results,
+and canonical URLs are built through the base-path helpers in `src/lib/site.ts`,
+so no path hard-codes `/youth/`.
+
+Docker/Nginx (`Dockerfile`, `site-platform`) are a **deferred pre-staging/VPS
+gate** and are not required for this preview. Docker Desktop is not needed for
+the current work. The Nginx TH/EN deep-route 404 behaviour is therefore **not
+verified** by the GitHub Pages preview.
+
 ## Smoke tests
 
 After a build, run the lightweight browser-level smoke tests (uses only Node's built-in `fetch` against `astro preview`; no test framework):
