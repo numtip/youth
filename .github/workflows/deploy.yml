@@ -1,0 +1,74 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Least-privilege permissions: read code, write Pages, and request the OIDC
+# token the official Pages actions need. No extra secrets.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Serialize Pages work so two runs never deploy at the same time.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Project Pages subpath: https://numtip.github.io/youth/
+      SITE_BASE: /${{ github.event.repository.name }}/
+      SITE_URL: https://${{ github.repository_owner }}.github.io
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate content and media
+        run: npm run validate
+
+      - name: Type-check (Astro)
+        run: npm run check
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Smoke test (production base)
+        run: npm run test:smoke
+
+      - name: Configure Pages
+        if: github.event_name == 'push'
+        uses: actions/configure-pages@v6
+
+      - name: Upload Pages artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

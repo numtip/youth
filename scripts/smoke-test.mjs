@@ -5,7 +5,12 @@ import { ROOT } from './lib/content.mjs';
 
 const DIST = join(ROOT, 'dist');
 const PORT = 4323;
-const BASE = `http://127.0.0.1:${PORT}`;
+const ORIGIN = `http://127.0.0.1:${PORT}`;
+
+// Production base path. Must match the SITE_BASE used at build time so the
+// preview server (and these checks) exercise the same route prefix.
+// '' at the root, e.g. '/youth' for GitHub Pages.
+const BASE_PATH = (process.env.SITE_BASE || '/').replace(/\/+$/, '') || '';
 
 if (!existsSync(join(DIST, 'index.html'))) {
   console.error('dist/ not found — run `npm run build` before `npm run test:smoke`.');
@@ -29,11 +34,15 @@ function record(name, ok, detail = '') {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? ' — ' + detail : ''}`);
 }
 
+function siteUrl(path) {
+  return `${ORIGIN}${BASE_PATH}${path}`;
+}
+
 async function waitReady(timeoutMs = 30000) {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
     try {
-      const res = await fetch(`${BASE}/`);
+      const res = await fetch(siteUrl('/'));
       if (res.ok) return;
     } catch {
       // server not up yet
@@ -44,7 +53,7 @@ async function waitReady(timeoutMs = 30000) {
 }
 
 async function fetchHtml(path) {
-  const res = await fetch(BASE + path);
+  const res = await fetch(siteUrl(path));
   return { status: res.status, html: await res.text() };
 }
 
@@ -83,11 +92,18 @@ try {
   const enHome = await fetchHtml('/en/');
   record(
     'lang switch: TH home links to EN',
-    thHome.html.includes('hreflang="en"') && thHome.html.includes('href="/en/"'),
+    thHome.html.includes('hreflang="en"') && thHome.html.includes(`href="${BASE_PATH}/en/"`),
   );
   record(
     'lang switch: EN home links to TH',
-    enHome.html.includes('hreflang="th"') && enHome.html.includes('href="/"'),
+    enHome.html.includes('hreflang="th"') && enHome.html.includes(`href="${BASE_PATH}/"`),
+  );
+
+  // Internal links must carry the production base path.
+  record(
+    'internal links use base path',
+    thHome.html.includes(`href="${BASE_PATH}/activities/"`),
+    `base="${BASE_PATH || '/'}"`,
   );
 
   // Search payload (client-side search data is embedded)

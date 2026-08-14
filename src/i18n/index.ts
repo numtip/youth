@@ -1,3 +1,5 @@
+import { stripBase, withBase } from '../lib/site';
+
 export const locales = ['th', 'en'] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = 'th';
@@ -184,24 +186,25 @@ export function useTranslations(locale: Locale): Ui {
 
 /**
  * Build a locale-aware href for a site-relative path (no leading locale prefix).
- * Thai routes stay unprefixed; English routes get an `/en` prefix.
+ * Thai routes stay unprefixed; English routes get an `/en` prefix. The result
+ * is prefixed with the configured base so it works on a Pages subpath too.
  */
 export function localeHref(locale: Locale, path = ''): string {
   const seg = path.replace(/^\/+|\/+$/g, '');
   const base = seg ? `/${seg}/` : '/';
-  return locale === 'en' ? (base === '/' ? '/en/' : `/en${base}`) : base;
+  const localized = locale === 'en' ? (base === '/' ? '/en/' : `/en${base}`) : base;
+  return withBase(localized);
 }
 
 /**
  * Translate the current pathname to the equivalent pathname in another locale.
- * Strips an existing `/en` prefix, then re-applies it when targeting English.
+ * Strips the base path and an existing `/en` prefix, then re-applies the target
+ * locale and base.
  */
 export function getLocalizedPathname(pathname: string, locale: Locale): string {
-  let path = pathname.replace(/^\/en(?=\/|$)/, '');
+  let path = stripBase(pathname).replace(/^\/en(?=\/|$)/, '');
   if (!path.startsWith('/')) path = '/' + path;
   if (path !== '/' && !path.endsWith('/')) path += '/';
-  if (locale === 'en') {
-    return path === '/' ? '/en/' : `/en${path}`;
-  }
-  return path;
+  const localized = locale === 'en' ? (path === '/' ? '/en/' : `/en${path}`) : path;
+  return withBase(localized);
 }

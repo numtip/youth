@@ -1,6 +1,7 @@
 ---
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { withBase } from '../lib/site';
 
 interface Props {
   src: string;
@@ -24,6 +25,6 @@ const missing = !existsSync(absolute);
       <span>{alt}</span>
     </figcaption>
   ) : (
-    <img src={src} alt={alt} loading="lazy" decoding="async" />
+    <img src={withBase(src)} alt={alt} loading="lazy" decoding="async" />
   )}
 </figure>
