@@ -80,8 +80,8 @@ try {
   // EN routes
   await checkRoute('/en/', 'Youth Volunteers for Community Development', 'EN /en/');
   await checkRoute('/en/activities/', 'All activities', 'EN /en/activities/');
-  await checkRoute('/en/activities/2569/biochar-brand/', 'ยุวชนอาสาพัฒนาแบรนด์คนเอาถ่าน', 'EN project (Thai content fallback)');
-  await checkRoute('/en/activities/2569/biochar-brand/activity-1/', 'ประชาสัมพันธ์และรับสมัครนักศึกษา', 'EN activity-1');
+  await checkRoute('/en/activities/2569/biochar-brand/', 'Youth Volunteers: Developing the Khon Ao Than brand', 'EN project');
+  await checkRoute('/en/activities/2569/biochar-brand/activity-1/', 'Publicity and recruitment of students, along with a study of the Khon Ao Than Community Enterprise', 'EN activity-1');
   await checkRoute('/en/about/', 'About us', 'EN /en/about/');
   await checkRoute('/en/contact/', 'Contact us', 'EN /en/contact/');
   await checkRoute('/en/documents/', 'Public documents', 'EN /en/documents/');
