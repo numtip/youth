@@ -3,19 +3,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../ProjectCard.astro';
 import { getLocale, localeHref, ui } from '../../i18n';
 import { getPublishedProjects, localizeEntry } from '../../lib/content';
+import { withBase } from '../../lib/site';
 
 const locale = getLocale(Astro.currentLocale);
 const t = ui[locale];
 const projects = await getPublishedProjects();
 const activitiesHref = localeHref(locale, 'activities');
+const heroImg = withBase('/media/brand/hero-banner.jpg');
 ---
 
 <BaseLayout>
-  <section class="bg-emerald-700 text-white">
-    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+  <section class="relative overflow-hidden bg-emerald-800 text-white">
+    <img
+      src={heroImg}
+      alt=""
+      aria-hidden="true"
+      loading="eager"
+      class="absolute inset-0 h-full w-full object-cover object-center opacity-40"
+    />
+    <div class="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
       <p class="mb-3 text-sm font-medium text-emerald-200">{t.siteTagline}</p>
-      <h1 class="max-w-2xl text-3xl font-bold leading-tight sm:text-4xl">{t.hero.title}</h1>
-      <p class="mt-4 max-w-2xl text-emerald-50">{t.hero.subtitle}</p>
+      <h1 class="max-w-2xl text-3xl font-bold leading-tight drop-shadow-md sm:text-4xl">{t.hero.title}</h1>
+      <p class="mt-4 max-w-2xl text-emerald-50 drop-shadow">{t.hero.subtitle}</p>
       <a
         href={activitiesHref}
         class="mt-8 inline-block rounded-lg bg-white px-5 py-3 font-semibold text-emerald-800 transition-colors hover:bg-emerald-50"
