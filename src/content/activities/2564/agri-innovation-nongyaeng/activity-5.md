@@ -5,7 +5,7 @@ project: "agri-innovation-nongyaeng"
 year: 2564
 sequence: 5
 eventDate: "2021-05-20"
-summary: "ถอดบทเรียนแนวทางทางการสร้างและสนับสนุนนวัตกรรมสินค้าเกษตรของวิสาหกิจชุมชนตำบลหนองแหย่ง อำเ"
+summary: "ถอดบทเรียนแนวทางทางการสร้างและสนับสนุนนวัตกรรมสินค้าเกษตรของวิสาหกิจชุมชนตำบลหนองแหย่ง อำเภอสันทราย จังหวัดเชียงใหม่"
 title_en: "Lessons learned on approaches to creating and supporting agricultural product innovation of the Nong Yaeng Subdistrict community enterprise, San Sai District, Chiang Mai Province"
 summary_en: "Lessons learned on approaches to creating and supporting agricultural product innovation of the Nong Yaeng Subdistrict community enterprise, San Sai District, Chiang Mai Province"
 cover: "/media/projects/2564/agri-innovation-nongyaeng/activity-5/5-6.jpg"

@@ -5,7 +5,7 @@ project: "eco-tourism-route"
 year: 2564
 sequence: 8
 eventDate: "2021-05-20"
-summary: "ถอดบทเรียนร่วมกันระหว่างชุมชน นักศึกษา นักวิชาการ เพื่อสรุปผลและกำหนดแนวทางการพัฒนาต่อยอดร"
+summary: "ถอดบทเรียนร่วมกันระหว่างชุมชน นักศึกษา นักวิชาการ เพื่อสรุปผลและกำหนดแนวทางการพัฒนาต่อยอดร่วมกัน"
 title_en: "Joint lessons-learned session among the community, students, and academics to summarize results and set a shared path for further development"
 summary_en: "Joint lessons-learned session among the community, students, and academics to summarize results and set a shared path for further development"
 cover: "/media/projects/2564/eco-tourism-route/activity-8/img-1.jpg"
