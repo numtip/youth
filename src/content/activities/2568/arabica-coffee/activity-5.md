@@ -6,6 +6,8 @@ year: 2568
 sequence: 5
 eventDate: "2025-07-16"
 summary: "กิจกรรมชั่งน้ำหนักปูนโดโลไมท์สำหรับปรับสภาพความเป็นกรดด่างของดินสวนกาแฟของเกษตรกรห้วยน้ำกืนรายแปลง (16-30 กรกรฎาคม 2568)"
+title_en: "Weighing dolomite lime to adjust the pH of coffee plantation soils"
+summary_en: "An activity to weigh dolomite lime for adjusting the pH of coffee plantation soils of the Huai Nam Kuen farmers, plot by plot (16–30 July 2568)."
 cover: "/media/projects/2568/arabica-coffee/activity-5/2.jpg"
 gallery:
   - "/media/projects/2568/arabica-coffee/activity-5/2.jpg"

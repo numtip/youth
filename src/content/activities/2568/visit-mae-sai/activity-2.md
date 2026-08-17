@@ -6,6 +6,8 @@ year: 2568
 sequence: 2
 eventDate: "2025-07-09"
 summary: "เข้าพบปะนายกองค์การบริหารส่วนตำบลแม่ทรายในการเข้าพื้นที่ตำบลแม่ทราย ณ ห้องประชุมองค์การบริหารส่วนตำบลแม่ทราย วันที่ 9 กรกฎาคม 2568"
+title_en: "Courtesy visit to the President of the Mae Sai Subdistrict Administrative Organization"
+summary_en: "A courtesy visit to the President of the Mae Sai Subdistrict Administrative Organization (SAO) to enter the Mae Sai Subdistrict area, held at the Mae Sai SAO meeting room on 9 July 2568."
 cover: "/media/projects/2568/visit-mae-sai/activity-2/484330_0.jpg"
 gallery:
   - "/media/projects/2568/visit-mae-sai/activity-2/484330_0.jpg"

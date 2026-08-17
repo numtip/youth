@@ -6,6 +6,8 @@ year: 2567
 sequence: 5
 eventDate: "2024-05-20"
 summary: "การถ่ายทอดอบรมเชิงปฏิบัติการ การแปรรูปผลิตภัณฑ์สัตว์เพื่อสร้างมูลค่าเพิ่ม"
+title_en: "Hands-on Training Workshop on Processing Animal Products to Add Value"
+summary_en: "Hands-on Training Workshop on Processing Animal Products to Add Value"
 cover: "/media/projects/2567/livestock-farmers/activity-5/10.jpg"
 gallery:
   - "/media/projects/2567/livestock-farmers/activity-5/10.jpg"

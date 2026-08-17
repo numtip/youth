@@ -6,6 +6,8 @@ year: 2564
 sequence: 4
 eventDate: "2021-05-20"
 summary: "นิเทศงานนักศึกษาที่ลงพื้นที่เก็บข้อมูลเพื่อวิเคราะห์สร้างนวัตกรรมสำหรับสินค้า"
+title_en: "Supervising students conducting field data collection to analyze the development of product innovation"
+summary_en: "Supervising students conducting field data collection to analyze the development of product innovation"
 cover: "/media/projects/2564/agri-innovation-nongyaeng/activity-4/4-3.jpg"
 gallery:
   - "/media/projects/2564/agri-innovation-nongyaeng/activity-4/4-3.jpg"

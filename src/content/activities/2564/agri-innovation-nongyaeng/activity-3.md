@@ -6,6 +6,8 @@ year: 2564
 sequence: 3
 eventDate: "2021-05-20"
 summary: "ลงพื้นที่เก็บข้อมูลเพื่อวิเคราะห์แนวทางการสร้างและสนับสนุนโครงการสร้างและสนับสนุนนวัตกรรมส"
+title_en: "Field data collection to analyze approaches for creating and supporting the agricultural product innovation project"
+summary_en: "Field data collection to analyze approaches for creating and supporting the agricultural product innovation project"
 cover: "/media/projects/2564/agri-innovation-nongyaeng/activity-3/3-3.jpg"
 gallery:
   - "/media/projects/2564/agri-innovation-nongyaeng/activity-3/3-3.jpg"

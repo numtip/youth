@@ -6,6 +6,8 @@ year: 2564
 sequence: 1
 eventDate: "2021-05-20"
 summary: "ประชุมวางแผนร่วมกับคณะกรรมการชุมชนฯและผู้เกี่ยวข้อง"
+title_en: "Planning meeting with the community committee and stakeholders"
+summary_en: "Planning meeting with the community committee and stakeholders"
 cover: "/media/projects/2564/agri-innovation-nongyaeng/activity-1/1-6.jpg"
 gallery:
   - "/media/projects/2564/agri-innovation-nongyaeng/activity-1/1-6.jpg"

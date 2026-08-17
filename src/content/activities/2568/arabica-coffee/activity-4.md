@@ -6,6 +6,8 @@ year: 2568
 sequence: 4
 eventDate: "2025-07-09"
 summary: "ยุวชนอาสาทำการวิเคราะห์ธาตุอาหารในดินปลูกกาแฟ การใช้pH test kit(9ก.ค.68) ณ ห้องปฏิบัติการรวมทางปฐพีวิทยาและฝึกอบรมทางดินและปุ๋ยชั้นสูง มหาวิทยาลัยแม่โจ้"
+title_en: "Youth Volunteers analyze nutrients in coffee-planting soil — using a pH test kit (9 July 2568)"
+summary_en: "Youth Volunteers analyzed nutrients in coffee-planting soil using a pH test kit (9 July 2568) at the Combined Pedology and Advanced Soil and Fertilizer Training Laboratory, Maejo University."
 cover: "/media/projects/2568/arabica-coffee/activity-4/1.jpg"
 gallery:
   - "/media/projects/2568/arabica-coffee/activity-4/1.jpg"

@@ -6,6 +6,8 @@ year: 2568
 sequence: 2
 eventDate: "2025-07-24"
 summary: "การลงพื้นสำรวจตลาดนัดในเทศบาลแม่โจ้ ในวันที่ 24 กรกฎาคม - 4 สิงหาคม 2568"
+title_en: "Field survey of the flea market in Maejo Municipality"
+summary_en: "A field survey of the flea market in Maejo Municipality, held from 24 July to 4 August 2568."
 cover: "/media/projects/2568/entrepreneurial-potential/activity-2/1.jpg"
 gallery:
   - "/media/projects/2568/entrepreneurial-potential/activity-2/1.jpg"

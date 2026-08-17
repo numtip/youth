@@ -6,6 +6,8 @@ year: 2564
 sequence: 1
 eventDate: "2021-05-20"
 summary: "จัดเวทีประชุมทำความเข้าใจเกี่ยวกับโครงการให้กลุ่มเป้าหมาย"
+title_en: "Organizing a consultation meeting to introduce the project to the target group"
+summary_en: "Organizing a consultation meeting to introduce the project to the target group"
 cover: "/media/projects/2564/eco-tourism-route/activity-1/20201203_161345.jpg"
 gallery:
   - "/media/projects/2564/eco-tourism-route/activity-1/20201203_161345.jpg"

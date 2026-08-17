@@ -6,6 +6,8 @@ year: 2567
 sequence: 5
 eventDate: "2024-09-06"
 summary: "กิจกรรมถ่ายทอดอบรมเชิงปฏิบัติการ การแปรรูปสมุนไพรตามทรัพยากรชุมชน ผู้ประกอบการถ่ายทอดกระบว"
+title_en: "Hands-on Training Workshop: Processing Local Herbs Based on Community Resources, with Entrepreneurs Demonstrating Traditional Herbal Production Processes – Academic Year 2567"
+summary_en: "Hands-on Training Workshop: Processing Local Herbs Based on Community Resources, with Entrepreneurs Demonstrating Traditional Herbal Production Processes"
 cover: "/media/projects/2567/local-herbs/activity-5/1.jpg"
 gallery:
   - "/media/projects/2567/local-herbs/activity-5/1.jpg"

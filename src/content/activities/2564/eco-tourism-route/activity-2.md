@@ -6,6 +6,8 @@ year: 2564
 sequence: 2
 eventDate: "2021-05-20"
 summary: "ประชุมคณะทำงานและนักศึกษาเพื่อวางแผนงานและติดตามการดำเนินงาน"
+title_en: "Meeting of the working team and students to plan work and monitor implementation"
+summary_en: "Meeting of the working team and students to plan work and monitor implementation"
 cover: "/media/projects/2564/eco-tourism-route/activity-2/260120212.jpg"
 gallery:
   - "/media/projects/2564/eco-tourism-route/activity-2/260120212.jpg"

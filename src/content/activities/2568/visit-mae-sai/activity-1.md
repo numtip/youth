@@ -6,6 +6,8 @@ year: 2568
 sequence: 1
 eventDate: "2025-07-03"
 summary: "การประชุมอาจารย์ที่ปรึกษาและนักศึกษาโครงการยุวชนอาสา “เที่ยวแม่ทรายสไตล์วิถีชีวิตชุมชน”วันที่ 3 กรกฎาคม 2568 ห้องเรียน อาคารเรียนแม่โจ้สามัคคี"
+title_en: "Meeting of advisors and students of the Youth Volunteer Project"
+summary_en: "A meeting of the advisors and students of the Youth Volunteer Project “Mae Sai Community Lifestyle Tourism”, held on 3 July 2568 in a classroom at the Maejo Samakkhi Academic Building."
 cover: "/media/projects/2568/visit-mae-sai/activity-1/484319_0.jpg"
 gallery:
   - "/media/projects/2568/visit-mae-sai/activity-1/484319_0.jpg"

@@ -6,6 +6,8 @@ year: 2568
 sequence: 3
 eventDate: "2025-08-06"
 summary: "การลงพื้นสำรวจสำรวจข้อมูลพื้นฐานของกลุ่มเกษตรกร ชุมชนทุ่งยาว อำเภอสันทราย จังหวัดเชียงใหม่ ในวันที่ 6 สิงหาคม 2568"
+title_en: "Field survey of the basic information of the farmers' group"
+summary_en: "A field survey of the basic information of the farmers' group in Thung Yao Community, San Sai District, Chiang Mai Province, held on 6 August 2568."
 cover: "/media/projects/2568/organic-vegetable/activity-3/3.png"
 gallery:
   - "/media/projects/2568/organic-vegetable/activity-3/3.png"

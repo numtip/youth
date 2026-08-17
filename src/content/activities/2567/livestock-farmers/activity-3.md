@@ -6,6 +6,8 @@ year: 2567
 sequence: 3
 eventDate: "2024-07-20"
 summary: "การลงพื้นสำรวจชุมชน"
+title_en: "Field Visit to Survey the Community"
+summary_en: "Field Visit to Survey the Community"
 cover: "/media/projects/2567/livestock-farmers/activity-3/7.jpg"
 gallery:
   - "/media/projects/2567/livestock-farmers/activity-3/7.jpg"

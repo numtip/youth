@@ -6,6 +6,8 @@ year: 2567
 sequence: 4
 eventDate: "2024-09-06"
 summary: "ถ่ายทอดอบรมเชิงปฏิบัติการ การให้ความรู้เกี่ยวกับสมุนไพรพื้นบ้าน"
+title_en: "Hands-on Training Workshop Providing Knowledge about Local Herbs"
+summary_en: "Hands-on Training Workshop Providing Knowledge about Local Herbs"
 cover: "/media/projects/2567/local-herbs/activity-4/01.jpg"
 gallery:
   - "/media/projects/2567/local-herbs/activity-4/01.jpg"

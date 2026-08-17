@@ -3,6 +3,8 @@ title: "ยุวชนอาสาพัฒนานวัตกรรมกา
 slug: "organic-vegetable"
 year: 2568
 summary: "ดร.อัณชยารัศมิ์ เนาว์โสภา คณะบริหารธุรกิจ มหาวิทยาลัยแม่โจ้"
+title_en: "Youth Volunteers: Developing innovations in organic vegetable production and cost-reducing technologies from agricultural waste of the Thung Yao community toward a circular economy"
+summary_en: "Dr. Anchayarat Naosopha, Faculty of Business Administration, Maejo University"
 cover: "/media/projects/2568/organic-vegetable/cover.jpg"
 status: "published"
 legacyUrls:

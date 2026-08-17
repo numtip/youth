@@ -6,6 +6,8 @@ year: 2567
 sequence: 1
 eventDate: "2024-08-18"
 summary: "การประชุมทำความเข้าใจกิจกรรมโครงการยุวชนอาสา ทั้ง 2 โครงการ"
+title_en: "Meeting to Understand the Activities of Both Youth Volunteer Projects"
+summary_en: "Meeting to Understand the Activities of Both Youth Volunteer Projects"
 cover: "/media/projects/2567/local-herbs/activity-1/1.jpg"
 gallery:
   - "/media/projects/2567/local-herbs/activity-1/1.jpg"

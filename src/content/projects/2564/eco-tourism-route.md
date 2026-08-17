@@ -3,6 +3,8 @@ title: "โครงการการพัฒนาเส้นทางท่
 slug: "eco-tourism-route"
 year: 2564
 summary: "จัดเวทีประชุมทำความเข้าใจเกี่ยวกับโครงการให้กลุ่มเป้าหมาย"
+title_en: "Eco-Tourism Route Development Project"
+summary_en: "Organizing a consultation meeting to introduce the project to the target group"
 cover: "/media/projects/2564/eco-tourism-route/cover.jpg"
 status: "published"
 legacyUrls:

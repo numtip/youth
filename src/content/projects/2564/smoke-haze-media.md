@@ -3,6 +3,8 @@ title: "โครงการยุวชนอาสาสื่อสารป
 slug: "smoke-haze-media"
 year: 2564
 summary: "ภาพกิจกรรมที่ 1"
+title_en: "Youth Volunteer Project for Communicating the Wildfire Smoke Haze Problem in Northern Thailand 2564"
+summary_en: "Activity Photo 1"
 cover: "/media/projects/2564/smoke-haze-media/cover.jpg"
 status: "published"
 legacyUrls:

@@ -6,6 +6,8 @@ year: 2568
 sequence: 4
 eventDate: "2025-08-30"
 summary: "การอบรมการผลิตผักอินทรีย์ที่มีประสิทธิภาพ ด้วยเทคโนโลยีลดต้นทุน ณ ศาลาเอนกประสงค์ บ้านทุ่งยาว อ.สันทราย จังหวัดเชียงใหม่ ในวันที่ 30 สิงหาคม 2568"
+title_en: "Training on efficient organic vegetable production with cost-reducing technology"
+summary_en: "Training on efficient organic vegetable production with cost-reducing technology, held at the multipurpose pavilion, Ban Thung Yao, San Sai District, Chiang Mai Province, on 30 August 2568."
 cover: "/media/projects/2568/organic-vegetable/activity-4/1.jpg"
 gallery:
   - "/media/projects/2568/organic-vegetable/activity-4/1.jpg"

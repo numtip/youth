@@ -6,6 +6,8 @@ year: 2564
 sequence: 1
 eventDate: "2021-05-20"
 summary: "ประชุมเตรียมความพร้อม จำนวน 3 ครั้ง"
+title_en: "Preparatory meetings (3 sessions)"
+summary_en: "Preparatory meetings (3 sessions)"
 cover: "/media/projects/2564/fish-hen-farming/activity-1/4.jpg"
 gallery:
   - "/media/projects/2564/fish-hen-farming/activity-1/4.jpg"

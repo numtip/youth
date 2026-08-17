@@ -6,6 +6,8 @@ year: 2564
 sequence: 7
 eventDate: "2021-05-20"
 summary: "ทดสอบเส้นทางและทักษะการสื่อความหมาย"
+title_en: "Testing the route and interpretation skills"
+summary_en: "Testing the route and interpretation skills"
 cover: "/media/projects/2564/eco-tourism-route/activity-7/IMG_1260.jpg"
 gallery:
   - "/media/projects/2564/eco-tourism-route/activity-7/IMG_1260.jpg"

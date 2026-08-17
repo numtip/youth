@@ -6,6 +6,8 @@ year: 2564
 sequence: 2
 eventDate: "2021-05-20"
 summary: "ลงพื้นที่ครั้งที่1 บ้านเลี้ยงไก่และเลี้ยงปลา"
+title_en: "Field visit No. 1: chicken and fish farming households"
+summary_en: "Field visit No. 1: chicken and fish farming households"
 cover: "/media/projects/2564/fish-hen-farming/activity-2/f6.jpg"
 gallery:
   - "/media/projects/2564/fish-hen-farming/activity-2/f6.jpg"

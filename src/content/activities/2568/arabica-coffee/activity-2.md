@@ -6,6 +6,8 @@ year: 2568
 sequence: 2
 eventDate: "2025-06-28"
 summary: "ตัวแทนยุวชนอาสาออกพื้นที่ภาคสนามเพื่อสัมภาษณ์เกษตรกรและการเก็บตัวอย่างดิน และนำมาวิเคราะห์สมบัติเคมีบางประการของดิน เพื่อวางแผนการปรับปรุงดินให้เหมาะสมกับการปลูกกาแฟ ณ แปลงเกษตรกร บ้านห้วยน้ำกืน ต.แม่เจดีย์ อ.เวียงป่าเป้า จ.เชียงราย จำนวน 3 แปลง (28 มิถุนายน 2568)"
+title_en: "Youth Volunteer representatives conduct field visits to interview farmers"
+summary_en: "Youth Volunteer representatives conducted field visits to interview farmers and collect soil samples, which were then analyzed for certain chemical properties in order to plan soil improvement suitable for coffee cultivation, at 3 farmer plots in Ban Huai Nam Kuen, Mae Jedee Subdistrict, Wiang Pa Pao District, Chiang Rai Province (28 June 2568)."
 cover: "/media/projects/2568/arabica-coffee/activity-2/17.jpg"
 gallery:
   - "/media/projects/2568/arabica-coffee/activity-2/17.jpg"
