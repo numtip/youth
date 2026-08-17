@@ -68,7 +68,7 @@ try {
   await waitReady();
 
   // TH routes
-  await checkRoute('/', 'ยุวชนอาสา เพื่อการพัฒนาชุมชน', 'TH /');
+  await checkRoute('/', 'ยุวชนอาสา มหาวิทยาลัยแม่โจ้ เพื่อการพัฒนาชุมชน', 'TH /');
   await checkRoute('/activities/', 'กิจกรรมทั้งหมด', 'TH /activities/');
   await checkRoute('/activities/2569/biochar-brand/', 'ยุวชนอาสาพัฒนาแบรนด์คนเอาถ่าน', 'TH /activities/2569/biochar-brand/');
   await checkRoute('/activities/2569/biochar-brand/activity-1/', 'ประชาสัมพันธ์และรับสมัครนักศึกษา', 'TH activity-1');
@@ -78,7 +78,7 @@ try {
   const thSearch = await checkRoute('/search/', 'ค้นหา', 'TH /search/');
 
   // EN routes
-  await checkRoute('/en/', 'Youth Volunteers for Community Development', 'EN /en/');
+  await checkRoute('/en/', 'Youth Volunteers of Maejo University for Community Development', 'EN /en/');
   await checkRoute('/en/activities/', 'All activities', 'EN /en/activities/');
   await checkRoute('/en/activities/2569/biochar-brand/', 'Youth Volunteers: Developing the Khon Ao Than brand', 'EN project');
   await checkRoute('/en/activities/2569/biochar-brand/activity-1/', 'Publicity and recruitment of students, along with a study of the Khon Ao Than Community Enterprise', 'EN activity-1');

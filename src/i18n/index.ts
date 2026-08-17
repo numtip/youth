@@ -34,8 +34,8 @@ export interface Ui {
 
 export const ui: Record<Locale, Ui> = {
   th: {
-    siteName: 'ยุวชนอาสา',
-    siteTagline: 'โครงการยุวชนอาสา เพื่อการพัฒนาชุมชนท้องถิ่น',
+    siteName: 'ยุวชนอาสา มหาวิทยาลัยแม่โจ้',
+    siteTagline: 'โครงการยุวชนอาสา มหาวิทยาลัยแม่โจ้ เพื่อการพัฒนาชุมชนท้องถิ่น',
     skipToContent: 'ข้ามไปยังเนื้อหา',
     nav: {
       home: 'หน้าแรก',
@@ -47,7 +47,7 @@ export const ui: Record<Locale, Ui> = {
     },
     lang: { th: 'ไทย', en: 'EN' },
     hero: {
-      title: 'ยุวชนอาสา เพื่อการพัฒนาชุมชน',
+      title: 'ยุวชนอาสา มหาวิทยาลัยแม่โจ้ เพื่อการพัฒนาชุมชน',
       subtitle: 'ร่วมเรียนรู้และลงมือพัฒนาผลิตภัณฑ์และเศรษฐกิจท้องถิ่น ผ่านโครงการยุวชนอาสาของมหาวิทยาลัย',
       cta: 'ดูกิจกรรมทั้งหมด',
     },
@@ -100,12 +100,12 @@ export const ui: Record<Locale, Ui> = {
       back: 'กลับสู่หน้าแรก',
     },
     breadcrumbs: { home: 'หน้าแรก' },
-    footer: { tagline: 'เผยแพร่โครงการและกิจกรรมยุวชนอาสา', rights: 'สงวนลิขสิทธิ์' },
-    meta: { description: 'โครงการและกิจกรรมยุวชนอาสา เพื่อการพัฒนาชุมชนท้องถิ่น' },
+    footer: { tagline: 'เผยแพร่โครงการและกิจกรรมยุวชนอาสา มหาวิทยาลัยแม่โจ้', rights: 'สงวนลิขสิทธิ์' },
+    meta: { description: 'โครงการและกิจกรรมยุวชนอาสา มหาวิทยาลัยแม่โจ้ เพื่อการพัฒนาชุมชนท้องถิ่น' },
   },
   en: {
-    siteName: 'Youth Volunteers',
-    siteTagline: 'Youth volunteer projects for local community development',
+    siteName: 'Youth Volunteers, Maejo University',
+    siteTagline: 'Youth volunteer projects of Maejo University for local community development',
     skipToContent: 'Skip to content',
     nav: {
       home: 'Home',
@@ -117,7 +117,7 @@ export const ui: Record<Locale, Ui> = {
     },
     lang: { th: 'ไทย', en: 'EN' },
     hero: {
-      title: 'Youth Volunteers for Community Development',
+      title: 'Youth Volunteers of Maejo University for Community Development',
       subtitle:
         'Learn and take action to develop local products and economy through university youth volunteer projects.',
       cta: 'View all activities',
@@ -171,8 +171,8 @@ export const ui: Record<Locale, Ui> = {
       back: 'Back to home',
     },
     breadcrumbs: { home: 'Home' },
-    footer: { tagline: 'Publishing youth volunteer projects and activities', rights: 'All rights reserved' },
-    meta: { description: 'Youth volunteer projects and activities for local community development' },
+    footer: { tagline: 'Publishing Maejo University youth volunteer projects and activities', rights: 'All rights reserved' },
+    meta: { description: 'Youth volunteer projects and activities of Maejo University for local community development' },
   },
 };
 
