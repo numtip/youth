@@ -6,6 +6,8 @@ year: 2568
 sequence: 1
 eventDate: "2025-07-17"
 summary: "การประชุมทำความเข้าใจกิจกรรมโครงการ เป้าหมายโครงการ อธิบายหน้าที่ความรับผิดชอบ และเตรียมความพร้อมในการร่วมกิจกรรม ในวันที่ 17 กรกฎาคม 2568 ณ ห้อง 310 อาคารธุรกิจ คณะบริหารธุรกิจ มหาวิทยาลัยแม่โจ้"
+title_en: "Meeting to understand the project activities...."
+summary_en: "A meeting to understand the project activities and project goals, explaining roles and responsibilities and preparing participants for the activities, held on 17 July 2568 at Room 310, Business Building, Faculty of Business Administration, Maejo University."
 cover: "/media/projects/2568/entrepreneurial-potential/activity-1/1.jpg"
 gallery:
   - "/media/projects/2568/entrepreneurial-potential/activity-1/1.jpg"

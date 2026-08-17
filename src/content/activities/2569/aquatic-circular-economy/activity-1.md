@@ -6,6 +6,8 @@ year: 2569
 sequence: 1
 eventDate: "2026-07-05"
 summary: "ประชาสัมพันธ์และรับสมัครนักศึกษาจากสองรายวิชา/หลักสูตรเข้าร่วมโครงการ"
+title_en: "Publicity and recruitment of students to join the project"
+summary_en: "Publicizing and recruiting students from two courses/programs to join the project."
 cover: "/media/projects/2569/aquatic-circular-economy/activity-1/1.jpg"
 gallery:
   - "/media/projects/2569/aquatic-circular-economy/activity-1/1.jpg"

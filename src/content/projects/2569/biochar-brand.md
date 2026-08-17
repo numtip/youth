@@ -3,6 +3,8 @@ title: "ยุวชนอาสาพัฒนาแบรนด์คนเอ
 slug: "biochar-brand"
 year: 2569
 summary: "ยกระดับผลิตภัณฑ์ชีวภาพอินทรีย์สันนาเม็ง ด้วยนวัตกรรมแบรนด์และตลาดดิจิทัล"
+title_en: "Youth Volunteers: Developing the Khon Ao Than brand"
+summary_en: "Elevating San Na Meng organic bio-products through brand innovation and digital marketing."
 cover: "/media/projects/2569/biochar-brand/cover.jpg"
 status: "published"
 legacyUrls:

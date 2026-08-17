@@ -6,6 +6,8 @@ year: 2568
 sequence: 3
 eventDate: "2025-07-04"
 summary: "ยุวชนอาสาทำการวิเคราะห์ธาตุอาหารในดินปลูกกาแฟ ณ ห้องปฏิบัติการรวมทางปฐพีวิทยาและฝึกอบรมทางดินและปุ๋ยชั้นสูง มหาวิทยาลัยแม่โจ้ ในช่วง 4-14 กรกฎาคม 2568"
+title_en: "Analysis of nutrients in coffee-planting soil at the Advanced Soil and Fertilizer Laboratory"
+summary_en: "Youth Volunteers analyzed nutrients in coffee-planting soil at the Combined Pedology and Advanced Soil and Fertilizer Training Laboratory, Maejo University, during 4–14 July 2568."
 cover: "/media/projects/2568/arabica-coffee/activity-3/1.jpg"
 gallery:
   - "/media/projects/2568/arabica-coffee/activity-3/1.jpg"

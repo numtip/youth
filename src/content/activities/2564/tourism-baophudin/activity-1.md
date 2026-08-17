@@ -6,6 +6,8 @@ year: 2564
 sequence: 1
 eventDate: "2021-01-20"
 summary: "ประชุมวางแผนการจัดการท่องเที่ยวโดยชุมชนเตรียมความพร้อมชุมชนตามหลักการท่องเที่ยวโดยชุมชน"
+title_en: "Planning meeting on community-based tourism management to prepare the community in line with community-based tourism principles"
+summary_en: "Planning meeting on community-based tourism management to prepare the community in line with community-based tourism principles"
 cover: "/media/projects/2564/tourism-baophudin/activity-1/12.jpg"
 gallery:
   - "/media/projects/2564/tourism-baophudin/activity-1/12.jpg"

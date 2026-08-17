@@ -6,6 +6,8 @@ year: 2564
 sequence: 3
 eventDate: "2021-05-20"
 summary: "ศึกษาและรวบรวมข้อมูลด้านประวัติศาสตร์ ประเพณี วัฒนธรรม และภูมิปัญญาท้องถิ่นแบบมีส่วนร่วม"
+title_en: "Participatory study and collection of data on local history, traditions, culture, and wisdom"
+summary_en: "Participatory study and collection of data on local history, traditions, culture, and wisdom"
 cover: "/media/projects/2564/eco-tourism-route/activity-3/Jan64_210222_7.jpg"
 gallery:
   - "/media/projects/2564/eco-tourism-route/activity-3/Jan64_210222_7.jpg"

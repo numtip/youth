@@ -6,6 +6,8 @@ year: 2564
 sequence: 6
 eventDate: "2021-05-20"
 summary: "ฝึกอบรมเชิงปฏิบัติการนักสื่อความหมายในชุมชนตามเส้นทางที่กำหนด"
+title_en: "Hands-on training for community heritage interpreters along the designated route"
+summary_en: "Hands-on training for community heritage interpreters along the designated route"
 cover: "/media/projects/2564/eco-tourism-route/activity-6/12-02-21_210222_17.jpg"
 gallery:
   - "/media/projects/2564/eco-tourism-route/activity-6/12-02-21_210222_17.jpg"

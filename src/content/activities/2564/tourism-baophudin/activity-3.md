@@ -6,6 +6,8 @@ year: 2564
 sequence: 3
 eventDate: "2021-03-16"
 summary: "กระบวนการสร้างสรรค์กิจกรรมการท่องเที่ยวโดยชุมชนเชิงอนุรักษ์"
+title_en: "Creative process for developing conservation-oriented community-based tourism activities"
+summary_en: "Creative process for developing conservation-oriented community-based tourism activities"
 cover: "/media/projects/2564/tourism-baophudin/activity-3/31.jpg"
 gallery:
   - "/media/projects/2564/tourism-baophudin/activity-3/31.jpg"

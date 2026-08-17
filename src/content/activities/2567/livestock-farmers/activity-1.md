@@ -6,6 +6,8 @@ year: 2567
 sequence: 1
 eventDate: "2024-07-20"
 summary: "การประชุมทำความเข้าใจกิจกรรมโครงการ เป้าหมายโครงการ"
+title_en: "Meeting to Clarify the Project Activities and Objectives"
+summary_en: "Meeting to Clarify the Project Activities and Objectives"
 cover: "/media/projects/2567/livestock-farmers/activity-1/1.jpg"
 gallery:
   - "/media/projects/2567/livestock-farmers/activity-1/1.jpg"

@@ -6,6 +6,8 @@ year: 2569
 sequence: 1
 eventDate: "2026-07-05"
 summary: "ประชาสัมพันธ์การเข้าร่วมโครงการและศึกษาข้อมูลเบื้องต้นของวิสาหกิจชุมชนคนเอาถ่าน"
+title_en: "Publicity and recruitment of students, along with a study of the Khon Ao Than Community Enterprise"
+summary_en: "Publicizing participation in the project and studying preliminary information about the Khon Ao Than Community Enterprise."
 cover: "/media/projects/2569/biochar-brand/activity-1/1.jpg"
 gallery:
   - "/media/projects/2569/biochar-brand/activity-1/1.jpg"

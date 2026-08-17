@@ -6,6 +6,8 @@ year: 2567
 sequence: 3
 eventDate: "2024-08-07"
 summary: "การลงพื้นสำรวจชุมชนแม่โจ้ ประเด็นสภาพการทำการเกษตร"
+title_en: "Field Visit to Survey the Maejo Community on Agricultural Conditions"
+summary_en: "Field Visit to Survey the Maejo Community on Agricultural Conditions"
 cover: "/media/projects/2567/local-herbs/activity-3/5.jpg"
 gallery:
   - "/media/projects/2567/local-herbs/activity-3/5.jpg"

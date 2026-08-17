@@ -6,6 +6,8 @@ year: 2568
 sequence: 1
 eventDate: "2025-06-25"
 summary: "การเรียนรู้และวิเคราะห์ปัญหา สาเหตุของการขาดธาตุอาหารและโรคที่เกิดในแปลงกาแฟ (25 มิถุนายน 2568) ณ ตึกดินและปุ๋ยขั้นสูง คณะผลิตกรรมการเกษตร มหาวิทยาลัยแม่โจ้"
+title_en: "Learning and Problem Analysis..."
+summary_en: "Learning and analysis of the problems, causes of nutrient deficiency and diseases occurring in coffee plots (25 June 2568) at the Advanced Soil and Fertilizer Building, Faculty of Agricultural Production, Maejo University."
 cover: "/media/projects/2568/arabica-coffee/activity-1/1.jpg"
 gallery:
   - "/media/projects/2568/arabica-coffee/activity-1/1.jpg"

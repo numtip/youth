@@ -3,6 +3,8 @@ title: "โครงการสร้างและสนับสนุนน
 slug: "agri-innovation-nongyaeng"
 year: 2564
 summary: "ประชุมวางแผนร่วมกับคณะกรรมการชุมชนฯและผู้เกี่ยวข้อง"
+title_en: "Project to Create and Support Agricultural Product Innovation in Nong Yaeng Subdistrict"
+summary_en: "Planning meeting with the community committee and stakeholders"
 cover: "/media/projects/2564/agri-innovation-nongyaeng/cover.jpg"
 status: "published"
 legacyUrls:

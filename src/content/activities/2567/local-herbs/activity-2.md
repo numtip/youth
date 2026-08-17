@@ -6,6 +6,8 @@ year: 2567
 sequence: 2
 eventDate: "2024-07-31"
 summary: "ประชุมเพื่อรายงานผลการสำรวจข้อมูลชุมชนจากผู้นำและผู้แทนชุมช…"
+title_en: "Meeting to Report the Results of the Community Data Survey to Community Leaders and Representatives"
+summary_en: "Meeting to report the results of the community data survey to community leaders and community representatives in the area, to inform the design of knowledge-transfer activities for the community."
 cover: "/media/projects/2567/local-herbs/activity-2/3.jpg"
 gallery:
   - "/media/projects/2567/local-herbs/activity-2/3.jpg"

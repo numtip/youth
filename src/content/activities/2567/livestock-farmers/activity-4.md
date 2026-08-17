@@ -6,6 +6,8 @@ year: 2567
 sequence: 4
 eventDate: "2024-05-20"
 summary: "การร่วมถ่ายทอดอบรมเชิงปฏิบัติการ – การผลิตอาหารสัตว์"
+title_en: "Hands-on Training Workshop – Animal Feed Production"
+summary_en: "Hands-on Training Workshop – Animal Feed Production"
 cover: "/media/projects/2567/livestock-farmers/activity-4/0.jpg"
 gallery:
   - "/media/projects/2567/livestock-farmers/activity-4/0.jpg"

@@ -6,6 +6,8 @@ year: 2564
 sequence: 5
 eventDate: "2021-05-20"
 summary: "พัฒนาถนนสายวัฒนธรรมในชุมชนตามแบบที่กำหนดไว้"
+title_en: "Developing the cultural street in the community according to the approved design"
+summary_en: "Developing the cultural street in the community according to the approved design"
 cover: "/media/projects/2564/eco-tourism-route/activity-5/20210225_200435.jpg"
 gallery:
   - "/media/projects/2564/eco-tourism-route/activity-5/20210225_200435.jpg"

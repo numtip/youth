@@ -3,6 +3,8 @@ title: "ยุวชนอาสา – เที่ยวแม่ทราย�
 slug: "visit-mae-sai"
 year: 2568
 summary: "ผศ.สมบัติ กันบุตร มหาวิทยาลัยแม่โจ้-แพร่ เฉลิมพระเกียรติ"
+title_en: "Youth Volunteers – Mae Sai Community Lifestyle Tourism"
+summary_en: "Asst. Prof. Sombat Kanbut, Maejo University Phrae Campus (Chalerm Phra Kiat)"
 cover: "/media/projects/2568/visit-mae-sai/cover.jpg"
 status: "published"
 legacyUrls:

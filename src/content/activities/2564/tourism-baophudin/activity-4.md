@@ -6,6 +6,8 @@ year: 2564
 sequence: 4
 eventDate: "2021-03-27"
 summary: "การจัดทำป้ายสื่อความหมายธรรมชาติ (Nature Interpretation Sign)"
+title_en: "Developing nature interpretation signs (Nature Interpretation Sign)"
+summary_en: "Developing nature interpretation signs (Nature Interpretation Sign)"
 cover: "/media/projects/2564/tourism-baophudin/activity-4/43.jpg"
 gallery:
   - "/media/projects/2564/tourism-baophudin/activity-4/43.jpg"

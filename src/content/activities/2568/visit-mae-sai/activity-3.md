@@ -6,6 +6,8 @@ year: 2568
 sequence: 3
 eventDate: "2025-08-13"
 summary: "อบรมเสวนาโครงการเที่ยวแม่ทรายสไตล์วิถีชีวิตชุมชน ณ ห้องประชุมศูนย์เด็กเล็กตำบลแม่ทรายวันพุธ ที่ 13 สิงหาคม 2568 การพัฒนากิจกรรม โปรแกรมและเส้นทางการท่องเที่ยวโดยชุมชนตำบลแม่ทราย"
+title_en: "Training and seminar on the Mae Sai Community Lifestyle Tourism project"
+summary_en: "Training and seminar on the Mae Sai Community Lifestyle Tourism project, held at the meeting room of the Mae Sai Subdistrict Child Development Center on Wednesday, 13 August 2568, on developing activities, programs, and community-based tourism routes in Mae Sai Subdistrict."
 cover: "/media/projects/2568/visit-mae-sai/activity-3/484340_0.jpg"
 gallery:
   - "/media/projects/2568/visit-mae-sai/activity-3/484340_0.jpg"

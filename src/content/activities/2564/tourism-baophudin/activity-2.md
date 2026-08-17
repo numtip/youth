@@ -6,6 +6,8 @@ year: 2564
 sequence: 2
 eventDate: "2021-05-20"
 summary: "การจัดการองค์ความรู้ให้เป็นระบบและเจตคติในการจัดการท่องเที่ยวโดยชุมชน"
+title_en: "Systematizing local knowledge and building positive attitudes toward community-based tourism management"
+summary_en: "Systematizing local knowledge and building positive attitudes toward community-based tourism management"
 cover: "/media/projects/2564/tourism-baophudin/activity-2/21.jpg"
 gallery:
   - "/media/projects/2564/tourism-baophudin/activity-2/21.jpg"

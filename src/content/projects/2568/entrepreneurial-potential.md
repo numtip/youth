@@ -3,6 +3,8 @@ title: "ยุวชนอาสาพัฒนาศักยภาพผู้
 slug: "entrepreneurial-potential"
 year: 2568
 summary: "ผศ.ดร.กัญญ์พัสวี กล่อมธงเจริญ คณะบริหารธุรกิจ มหาวิทยาลัยแม่โจ้"
+title_en: "Youth Volunteers: Developing the potential of retail entrepreneurs in the community flea market of Maejo Municipality"
+summary_en: "Asst. Prof. Dr. Kanyapaswee Klomthongcharoen, Faculty of Business Administration, Maejo University"
 cover: "/media/projects/2568/entrepreneurial-potential/cover.jpg"
 status: "published"
 legacyUrls:

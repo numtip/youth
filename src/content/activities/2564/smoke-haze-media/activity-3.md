@@ -6,6 +6,8 @@ year: 2564
 sequence: 3
 eventDate: "2021-05-20"
 summary: "ภาพกิจกรรมที่ 3"
+title_en: "Activity Photo 3"
+summary_en: "Activity Photo 3"
 cover: "/media/projects/2564/smoke-haze-media/activity-3/34_23.jpg"
 gallery:
   - "/media/projects/2564/smoke-haze-media/activity-3/34_23.jpg"

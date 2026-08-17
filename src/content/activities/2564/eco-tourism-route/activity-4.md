@@ -6,6 +6,8 @@ year: 2564
 sequence: 4
 eventDate: "2021-05-20"
 summary: "เสนอแบบการพัฒนาถนนสายวัฒนธรรมสมาชิกในชุมชนร่วมพิจารณา"
+title_en: "Presenting the cultural street development design for consideration by community members"
+summary_en: "Presenting the cultural street development design for consideration by community members"
 cover: "/media/projects/2564/eco-tourism-route/activity-4/1122021_210222_1.jpg"
 gallery:
   - "/media/projects/2564/eco-tourism-route/activity-4/1122021_210222_1.jpg"
