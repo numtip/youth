@@ -13,4 +13,5 @@ sources:
   - title: "Legacy Joomla source"
     url: "https://researchex.mju.ac.th/youth/index.php/activity/34-arabica-coffee-production"
 order: 30
+featured: true
 ---

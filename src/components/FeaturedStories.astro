@@ -1,0 +1,35 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { getLocale, localeHref, ui } from '../i18n';
+import { getFeaturedProjects, localizeEntry } from '../lib/content';
+
+const locale = getLocale(Astro.currentLocale);
+const t = ui[locale];
+const featured = (await getFeaturedProjects()).slice(0, 4);
+---
+
+{
+  featured.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <h2 class="mb-6 text-2xl font-bold text-stone-900">{t.home.featured}</h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featured.map((project, index) => {
+          const { title, summary } = localizeEntry(locale, project.data);
+          return (
+            <div class:list={['h-full', index === 0 && 'sm:col-span-2']}>
+              <ProjectCard
+                featured
+                title={title}
+                summary={summary}
+                cover={project.data.cover}
+                alt={title}
+                year={project.data.year}
+                href={localeHref(locale, `activities/${project.data.year}/${project.data.slug}`)}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  )
+}
