@@ -1,0 +1,11 @@
+{
+  "_note": "Phase A pilot subset only. Do not bulk-convert the rest of public/media until this pilot's size/quality gates pass. Originals are never overwritten; derivatives land under public/media/optimized/.",
+  "maxWidth": 1600,
+  "quality": 80,
+  "paths": [
+    "/media/brand/hero-banner.jpg",
+    "/media/projects/2569/biochar-brand/cover.jpg",
+    "/media/projects/2568/arabica-coffee/cover.jpg",
+    "/media/projects/2568/organic-vegetable/activity-3/Screenshot_2025-08-09_164647.png"
+  ]
+}

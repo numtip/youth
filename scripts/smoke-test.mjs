@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from './lib/content.mjs';
 
@@ -36,6 +36,16 @@ function record(name, ok, detail = '') {
 
 function siteUrl(path) {
   return `${ORIGIN}${BASE_PATH}${path}`;
+}
+
+function listFiles(dir, out = []) {
+  if (!existsSync(dir)) return out;
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) listFiles(path, out);
+    else out.push(path);
+  }
+  return out;
 }
 
 async function waitReady(timeoutMs = 30000) {
@@ -114,6 +124,15 @@ try {
   record(
     'search: EN payload present',
     enSearch.includes('id="search-data"') && enSearch.includes('biochar-brand'),
+  );
+
+  const astroAssets = listFiles(join(DIST, '_astro'));
+  const jsBundles = astroAssets.filter((f) => f.endsWith('.js'));
+  record('no external JS bundles', jsBundles.length === 0, `${jsBundles.length} js file(s)`);
+  record('homepage has no external script src', !/<script[^>]+src=/i.test(thHome.html));
+  record(
+    'self-hosted Sarabun emitted',
+    astroAssets.some((f) => /sarabun/i.test(f)),
   );
 
   // 404 for unknown route

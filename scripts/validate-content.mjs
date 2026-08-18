@@ -120,6 +120,9 @@ function checkProject(entry) {
   if ('order' in d && (!Number.isInteger(d.order) || d.order <= 0)) {
     addError(file, `order must be a positive integer, got ${JSON.stringify(d.order)}`);
   }
+  if ('featured' in d && typeof d.featured !== 'boolean') {
+    addError(file, `featured must be a boolean, got ${JSON.stringify(d.featured)}`);
+  }
 }
 
 function checkActivity(entry) {

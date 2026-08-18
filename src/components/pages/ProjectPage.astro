@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../Breadcrumbs.astro';
 import MediaFigure from '../MediaFigure.astro';
@@ -8,17 +9,20 @@ import { getLocale, localeHref, ui } from '../../i18n';
 import { getPublishedActivities, localizeEntry } from '../../lib/content';
 
 interface Props {
-  project: CollectionEntry<'projects'>['data'];
+  project: CollectionEntry<'projects'>;
 }
 
 const { project } = Astro.props;
 const locale = getLocale(Astro.currentLocale);
 const t = ui[locale];
 
-const { title, summary } = localizeEntry(locale, project);
+const { title, summary } = localizeEntry(locale, project.data);
 const activities = (await getPublishedActivities()).filter(
-  (a) => a.data.project === project.slug && a.data.year === project.year,
+  (a) => a.data.project === project.data.slug && a.data.year === project.data.year,
 );
+
+const hasStory = Boolean(project.body?.trim());
+const { Content } = hasStory ? await render(project) : { Content: null };
 
 const activitiesHref = localeHref(locale, 'activities');
 const crumbs = [
@@ -33,10 +37,10 @@ const crumbs = [
     <Breadcrumbs items={crumbs} />
 
     <article class="mt-6 grid gap-8 lg:grid-cols-2">
-      <MediaFigure src={project.cover} alt={title} aspect="4/3" class="rounded-xl" />
+      <MediaFigure src={project.data.cover} alt={title} aspect="4/3" class="rounded-xl" />
       <div>
         <span class="rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800">
-          {t.activities.year} {project.year}
+          {t.activities.year} {project.data.year}
         </span>
         <h1 class="mt-3 text-3xl font-bold text-stone-900">{title}</h1>
         <p class="mt-4 text-stone-700">{summary}</p>
@@ -45,6 +49,14 @@ const crumbs = [
         </a>
       </div>
     </article>
+
+    {
+      Content && (
+        <div class="md-body mt-10 max-w-3xl text-stone-700">
+          <Content />
+        </div>
+      )
+    }
 
     <section class="mt-12">
       <h2 class="text-2xl font-bold text-stone-900">{t.project.activities}</h2>

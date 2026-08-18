@@ -6,7 +6,7 @@ For each approved project:
 
 1. Copy only approved source images into a deterministic project/activity path.
 2. Keep the original approved JPEG outside the public folder or in an access-controlled archive.
-3. Generate optimised WebP/AVIF variants for the public site.
+3. Generate additive WebP derivatives with `npm run optimize:images` (pilot subset in `scripts/image-pilot.json`). Originals under this folder are never overwritten.
 4. Ensure every public image has a descriptive Thai `alt` text in its content file.
 
 Expected initial paths:

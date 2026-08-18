@@ -1,0 +1,83 @@
+{
+  "generatedAt": "2026-08-18T03:14:46.175Z",
+  "originals": {
+    "count": 586,
+    "bytes": 224709910,
+    "byExt": {
+      ".jpg": {
+        "count": 576,
+        "bytes": 212607954
+      },
+      ".png": {
+        "count": 10,
+        "bytes": 12101956
+      }
+    },
+    "largest": [
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-5/IMG_1227.jpg",
+        "bytes": 2820972
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-7/IMG_1360.jpg",
+        "bytes": 2776147
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-7/IMG_1181.jpg",
+        "bytes": 2650071
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-7/IMG_1493.jpg",
+        "bytes": 2611679
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-7/IMG_1443.jpg",
+        "bytes": 2606207
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-5/IMG_1229.jpg",
+        "bytes": 2498467
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-7/IMG_1115.jpg",
+        "bytes": 2218213
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-7/IMG_1423.jpg",
+        "bytes": 2119133
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-7/IMG_1198.jpg",
+        "bytes": 2094945
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-3/20210116_142605.jpg",
+        "bytes": 1988869
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-7/20210404_103830.jpg",
+        "bytes": 1977807
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-7/IMG_1555.jpg",
+        "bytes": 1977384
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-3/20210116_155622.jpg",
+        "bytes": 1939194
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-2/20210306_103120.jpg",
+        "bytes": 1935272
+      },
+      {
+        "path": "/media/projects/2564/eco-tourism-route/activity-5/IMG_1222.jpg",
+        "bytes": 1923612
+      }
+    ]
+  },
+  "optimized": {
+    "count": 0,
+    "bytes": 0
+  }
+}
