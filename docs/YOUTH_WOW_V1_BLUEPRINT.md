@@ -281,7 +281,7 @@ Measured on the Phase D QA exit (`SITE_BASE=/youth/ npm run build`, 2026-08-18):
 | Total static output | ≤ 100 MB after optimization | 218.5 MB (`dist`), 214.3 MB raw originals | FAIL (P2, gated) |
 | Max image per page (home/index) | ≤ 250 KB avg, ≤ 1 MB worst | 179.4 KB avg, 421.5 KB worst, 0 over 1 MB | PASS |
 | Max image per page (photo-dense project) | ≤ 250 KB avg, ≤ 1 MB worst | 245.9 KB avg, 1,419.2 KB worst, 7 over 1 MB | FAIL (P2, gated) |
-| CSS per page | ≤ 34 KB (34,816 B) | 33,887 B = 33.09 KB at `base=/youth/` (33,851 B at `base=/`), 1 file, 1 `<link>` per page | PASS (929 B headroom) |
+| CSS per page | ≤ 34 KB (34,816 B) | 30,711 B = 29.99 KB at `base=/youth/` (30,675 B at `base=/`), 1 file, 1 `<link>` per page | PASS (4,105 B headroom) |
 | JS (external) per page | 0 | 0 `.js`/`.mjs` in `dist`, 0 `<script src=` in 154 pages | PASS |
 | HTML per page | ≤ 40 KB | 135 of 154 pages pass; 19 breach, worst 136,135 B | Deviation — see below |
 | `npm run build` time | ≤ 30 s | ~6.5 s (154 pages) | PASS |
@@ -292,8 +292,11 @@ Measured on the Phase D QA exit (`SITE_BASE=/youth/ npm run build`, 2026-08-18):
 The CSS ceiling is now **enforced**, not just documented: `scripts/smoke-test.mjs`
 asserts total emitted CSS ≤ 34,816 B and exactly one stylesheet link per page.
 That check exists because the first Phase D measurement was taken from a stale
-`dist` and under-reported CSS by 595 B. The image audit script enforces the media
-budgets. Lighthouse figures are real runs (LH 12.8.2, mobile form factor,
+`dist` and under-reported CSS by 595 B. A follow-up pass also found Tailwind 4
+was scanning `docs/*.md` and emitting dead utilities named in blueprint prose
+(for example `focus:outline-none`), which inflated CSS by ~3.2 KB until
+`@import "tailwindcss" source("../")` scoped detection to `src/`. The image
+audit script enforces the media budgets. Lighthouse figures are real runs (LH 12.8.2, mobile form factor,
 simulated throttling) against the deployed site, which is a near-identical build
 of the Phase C exit commit — they do not include the Phase D fixes.
 

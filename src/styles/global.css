@@ -1,4 +1,7 @@
-@import "tailwindcss";
+/* Scope class detection to src/. Tailwind 4 otherwise scans the whole repo, so
+   prose in docs/*.md that names a utility emits that utility as dead CSS and
+   counts against the 34 KB ceiling. */
+@import "tailwindcss" source("../");
 
 @theme {
   --font-sans: "Sarabun", "IBM Plex Sans Thai", "Noto Sans Thai", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
