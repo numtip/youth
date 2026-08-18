@@ -274,20 +274,100 @@ No CDN required; GH Pages static output stays the deploy target.
 
 ## 13. Performance budgets
 
-Measured on the Phase C exit (local `npm run build`, 2026-08-18):
+Measured on the Phase D QA exit (`SITE_BASE=/youth/ npm run build`, 2026-08-18):
 
-| Budget | Target | Current (baseline) |
+| Budget | Target | Phase D exit (verified) | Verdict |
+| --- | --- | --- | --- |
+| Total static output | ≤ 100 MB after optimization | 218.5 MB (`dist`), 214.3 MB raw originals | FAIL (P2, gated) |
+| Max image per page (home/index) | ≤ 250 KB avg, ≤ 1 MB worst | 179.4 KB avg, 421.5 KB worst, 0 over 1 MB | PASS |
+| Max image per page (photo-dense project) | ≤ 250 KB avg, ≤ 1 MB worst | 245.9 KB avg, 1,419.2 KB worst, 7 over 1 MB | FAIL (P2, gated) |
+| CSS per page | ≤ 34 KB (34,816 B) | 33,183 B = 32.41 KB, 1 file, 1 `<link>` per page | PASS (1,633 B headroom) |
+| JS (external) per page | 0 | 0 `.js`/`.mjs` in `dist`, 0 `<script src=` in 154 pages | PASS |
+| HTML per page | ≤ 40 KB | 135 of 154 pages pass; 19 breach, worst 136,135 B | Deviation — see below |
+| `npm run build` time | ≤ 30 s | ~6.5 s (154 pages) | PASS |
+| Lighthouse mobile — TH home | LCP ≤ 2.5 s, CLS ≤ 0.1 | Perf 99–100, A11y 96, BP 96, SEO 100; LCP 1.7–1.9 s, CLS 0–0.003, TBT 0 ms | PASS |
+| Lighthouse mobile — TH activity + gallery | LCP ≤ 2.5 s, CLS ≤ 0.1 | Perf 95, A11y 94, BP 96, SEO 100; LCP 2.8 s, CLS 0, TBT 0 ms | LCP over by 0.3 s |
+| Smoke tests | pass | 41/41 at both `base=/` and `base=/youth/` | PASS |
+
+Budgets enforced by the image audit script in CI; smoke test asserts no external
+JS is emitted. Lighthouse figures are real runs (LH 12.8.2, mobile form factor,
+simulated throttling) against the deployed site, which is a near-identical build
+of this commit.
+
+### HTML budget deviation (Phase D — not a silent waiver)
+
+The ≤ 40 KB target holds for typical pages (avg 25.0 KB across 154 pages) but
+**19 pages breach it**: 18 photo-dense project pages plus TH `/search/`.
+
+Driver is gallery markup that scales with image count — `fish-hen-farming`
+carries 83 images, `organic-vegetable` 63. A secondary avoidable cost is the
+per-page `application/json` gallery blob, which re-serializes the `src` and
+`alt` of every image already present in the `<img>` markup (18,753 B = 19.7% of
+`fish-hen-farming`). Removing it would cut 16–21% per page but would **not**
+bring the worst pages into budget (`organic-vegetable` 136,135 B → ~107,400 B),
+so it does not resolve the deviation and was not worth the release-time risk of
+rewriting the freshly-QA'd lightbox.
+
+**≤ 40 KB is not technically sensible for pages carrying 60–85 photos.** Revised
+statement: **≤ 40 KB for pages with roughly ≤ 20 gallery images**; photo-dense
+project pages are expected to run 60–136 KB uncompressed. Over the wire this is
+far smaller (the 33 KB stylesheet compresses to 7,668 B; HTML compresses
+comparably), and measured TBT stays at 0 ms because there is no external JS.
+
+### Phase D P1 fixes (verified)
+
+| Fix | Evidence before | Evidence after |
 | --- | --- | --- |
-| Total static output | ≤ 100 MB after optimization | ~221 MB |
-| Max image per page (gallery) | ≤ 250 KB avg, ≤ 1 MB worst | up to 1.5 MB |
-| CSS per page | ≤ 34 KB | 32.4 KB |
-| JS (external) per page | 0 KB | 0 KB (inline only) |
-| HTML per page | ≤ 40 KB | ~10–21 KB |
-| `npm run build` time | ≤ 30 s | ~15 s |
-| Lighthouse (mobile) | LCP ≤ 2.5 s, CLS ≤ 0.1 | not measured yet |
+| Card focus ring was clipped away entirely (`overflow-hidden` card, link fills the padding box, ring offset outward) | 3 px mimic ring at `+2px` invisible on screenshot | `.card-link:focus-visible{outline-offset:-2px}` — ring visible on card body |
+| Activities timeline squeezed cards at ≤ 479 px | EN 320 px grid `81.5px 48px 126.5px`; content 126 px (40% of viewport); one title wrapped to 18 lines | grid `20px 256px`; content 256 px (80%); worst title 7 lines; no horizontal scroll |
+| EN activity pages emitted Thai prose with no language override (WCAG 3.1.2) | `<html lang="en">` wrapping untranslated Thai body | `lang="th"` on `.md-body`, 114 pages |
+| Heading order skipped `h2 → h4` on project pages (WCAG 1.3.1) | 26 pages with a skip | 0 heading-order violations across 154 pages; every page has exactly one `h1` |
+| Search input suppressed its focus ring and had a 1.28:1 substitute (WCAG 2.4.7/1.4.11) | `focus:outline-none` + `focus:ring-emerald-200` | utilities removed; global 2 px emerald ring applies |
+| Search placeholder contrast | 2.59:1 | 4.79:1 |
+| Footer copyright contrast | 3.65:1 at 12 px | 6.76:1 |
+| Search results injected `h3` directly under `h1` | `h3` | `h2` |
+| Landmark names were English on TH pages | `aria-label="Language"`, nav labelled "Home" | localized `เมนูหลัก` / `เลือกภาษา` / `เส้นทางนำทาง`, EN "Main navigation" / "Select language" |
+| Skip link did not move focus in Safari | no `tabindex` on `<main>` | `tabindex="-1"`; focus lands on `<main>`, and `:focus-visible` does **not** match, so no page-wide outline |
+| Sticky header could cover fragment targets | no `scroll-padding-top` | `scroll-padding-top: 6rem` |
+| Four activity pages linked internal sources without the base path — 404 on GitHub Pages | `href="/activities/2569/biochar-brand"` on 8 pages | `href="/youth/activities/2569/biochar-brand"`; **0** unprefixed site-absolute refs across 154 pages |
+| Featured cover blew the ≤ 1 MB per-image budget on 3 high-traffic pages | `eco-tourism-route/cover.jpg` 1,483,995 B | WebP derivative 247.2 KB (−83%); homepage image payload 4,104.7 KB → 2,332.5 KB, worst 1,449.2 → 421.5 KB, images over 1 MB 1 → 0 |
 
-Budgets enforced by the new image audit script in CI; smoke test extended to
-assert no external JS is emitted.
+### Phase D P2 debt (recorded, deliberately not fixed)
+
+1. **Gallery JSON blob duplication** — 16–21% of photo-dense page HTML. Fix is to
+   read `src`/`alt` off the existing `.gallery-item img` nodes. Does not resolve
+   the HTML deviation on its own.
+2. **TH `/search/` is 42,799 B**, 85.5% of it the inline search index (36,597 B).
+   EN is fine at 26,488 B. Trimming per-record fields changes search behaviour,
+   so it is a Phase-E-or-later decision.
+3. **Raw media 214.3 MB vs the 100 MB budget**; `dist` ships 218.5 MB. Only 5
+   optimized derivatives exist (668.0 KB). Bulk conversion stays gated on
+   `scripts/image-pilot.json`.
+4. **7 images over 1 MB remain on `activities/2568/organic-vegetable`**, worst a
+   1,419.2 KB PNG screenshot used as photography.
+5. **No favicon.** Browsers request `/favicon.ico` at the *domain root* — outside
+   `/youth/` — and get a 404, which zeroes Lighthouse `errors-in-console` and
+   caps Best Practices at 96. Needs an owner-supplied brand asset, so it is not
+   something QA should invent.
+6. **Activity hero `<img>` has no `width`/`height`** (the homepage hero does).
+   Currently harmless: measured CLS is 0 because `.media-figure` reserves the box
+   via `aspect-ratio`. Defense-in-depth only.
+7. **Lightbox counter is populated before `showModal()`**, so the `aria-live`
+   region may not announce the first slide. Simply moving `updateSlide()` after
+   `showModal()` would announce but flash an empty `<img>`; the correct fix
+   re-sets the counter text after opening.
+8. **`<figure>` inside `<button>`** in the gallery trigger violates the button
+   content model. Parses fine; no assistive-tech impact measured.
+9. **`uses-long-cache-ttl` scores 0.5** — GitHub Pages exposes no cache-header
+   control. Accepted.
+10. **TH `/404/` language switcher** targets `/404/`, which GitHub Pages serves
+    through `404.html`; the link lands on a 404 page rather than the EN 404.
+11. **`legacyUrls` render as raw `/youth/index.php/...` paths** that 404 on
+    GitHub Pages. The adjacent absolute "Legacy Joomla source" link does work,
+    so each reference list carries one working and one dead link. This is
+    content modelling, pre-existing and outside WOW-V1 scope.
+12. **Internal `sources` links are base-prefixed but not locale-aware** — EN
+    pages link to the TH project page. Correct and resolving, just not localized.
 
 ### CSS budget revision (Phase B — not a silent waiver)
 
