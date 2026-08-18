@@ -1,4 +1,7 @@
-@import "tailwindcss";
+/* Scope class detection to src/. Tailwind 4 otherwise scans the whole repo, so
+   prose in docs/*.md that names a utility emits that utility as dead CSS and
+   counts against the 34 KB ceiling. */
+@import "tailwindcss" source("../");
 
 @theme {
   --font-sans: "Sarabun", "IBM Plex Sans Thai", "Noto Sans Thai", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
@@ -96,6 +99,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Sticky header height, so fragment/focus scrolls do not land under it. */
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -107,6 +112,20 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-emerald-600);
   outline-offset: 2px;
+}
+
+/* Card-wide links fill their card's padding box, and the card clips overflow to
+   round the cover image, so an outward-offset ring is clipped away entirely.
+   The radius keeps the inset ring's corners from being cut by that same clip. */
+.card-link:focus-visible {
+  outline-offset: -2px;
+  border-radius: 0.625rem;
+}
+
+/* Focus target for the skip link, not a control: a ring here would outline the
+   whole page, and Chrome carries keyboard modality over from the skip link. */
+main[tabindex='-1']:focus-visible {
+  outline: none;
 }
 
 .skip-link {
@@ -440,6 +459,38 @@ body {
 
   .year-timeline__year {
     font-size: 1.125rem;
+  }
+}
+
+/* Below 480px the year gutter + rail cost ~140px, leaving the cards under half
+   the viewport (worse in EN, where "Year 2569" is wider than "ปี 2569"). Stack
+   the year above its cards and keep the rail as a narrow spine. */
+@media (max-width: 479px) {
+  .year-timeline__item {
+    grid-template-columns: 1.25rem minmax(0, 1fr);
+    column-gap: 0.75rem;
+    row-gap: 0.5rem;
+  }
+
+  .year-timeline__year {
+    grid-column: 2;
+    text-align: start;
+  }
+
+  .year-timeline__node {
+    grid-column: 1;
+  }
+
+  /* Both rows are implicit here, so `-1` would resolve to explicit line 1 and
+     collapse the rail to a stub. Span the two rows explicitly instead. */
+  .year-timeline__item:not(:last-child)::after {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .year-timeline__content {
+    grid-column: 2;
+    grid-row: 2;
   }
 }
 

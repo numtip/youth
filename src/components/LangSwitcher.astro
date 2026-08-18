@@ -1,13 +1,14 @@
 ---
-import { getLocale, getLocalizedPathname } from '../i18n';
+import { getLocale, getLocalizedPathname, ui } from '../i18n';
 
 const locale = getLocale(Astro.currentLocale);
+const t = ui[locale];
 const pathname = Astro.url.pathname;
 const thHref = getLocalizedPathname(pathname, 'th');
 const enHref = getLocalizedPathname(pathname, 'en');
 ---
 
-<nav aria-label="Language" class="flex items-center rounded-full border border-stone-300 p-0.5 text-sm font-medium">
+<nav aria-label={t.nav.languageLabel} class="flex items-center rounded-full border border-stone-300 p-0.5 text-sm font-medium">
   <a
     href={thHref}
     hreflang="th"

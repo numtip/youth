@@ -5,6 +5,7 @@ import Breadcrumbs from '../Breadcrumbs.astro';
 import Gallery from '../Gallery.astro';
 import { getLocale, localeHref, ui } from '../../i18n';
 import { formatEventDate, localizeEntry } from '../../lib/content';
+import { withBase } from '../../lib/site';
 
 interface Props {
   id: string;
@@ -31,7 +32,13 @@ const crumbs = [
   { label: title },
 ];
 
-const sources = [...activity.data.legacyUrls.map((u) => ({ title: u, url: u })), ...activity.data.sources];
+// Some sources point at internal routes as site-absolute paths, which 404 under
+// a subpath deploy unless they carry the base. withBase is idempotent, so the
+// already-prefixed legacy Joomla paths pass through unchanged.
+const sources = [
+  ...activity.data.legacyUrls.map((u) => ({ title: u, url: u })),
+  ...activity.data.sources,
+].map((source) => (source.url.startsWith('/') ? { ...source, url: withBase(source.url) } : source));
 ---
 
 <BaseLayout title={title} description={summary}>
@@ -58,7 +65,7 @@ const sources = [...activity.data.legacyUrls.map((u) => ({ title: u, url: u })),
 
       <section class="mt-10">
         <h2 class="text-xl font-bold text-stone-900">{t.activity.details}</h2>
-        <div class="md-body mt-4 text-stone-700">
+        <div class="md-body mt-4 text-stone-700" lang="th">
           <Content />
         </div>
       </section>

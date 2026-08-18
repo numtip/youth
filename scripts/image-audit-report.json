@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-18T03:14:46.175Z",
+  "generatedAt": "2026-08-18T04:43:43.394Z",
   "originals": {
     "count": 586,
     "bytes": 224709910,
@@ -77,7 +77,7 @@
     ]
   },
   "optimized": {
-    "count": 0,
-    "bytes": 0
+    "count": 5,
+    "bytes": 683992
   }
 }

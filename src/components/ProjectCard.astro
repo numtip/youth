@@ -15,7 +15,7 @@ const { title, summary, cover, alt, year, href, featured = false } = Astro.props
 ---
 
 <article class="group flex h-full flex-col overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm transition-shadow hover:shadow-md">
-  <a href={href} class="flex h-full flex-col">
+  <a href={href} class="card-link flex h-full flex-col">
     <MediaFigure src={cover} alt={alt} aspect={featured ? '16/9' : '4/3'} />
     <div class:list={['flex flex-1 flex-col gap-2', featured ? 'p-5 sm:p-6' : 'p-4']}>
       <div class="flex items-center gap-2">

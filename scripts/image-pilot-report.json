@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-08-18T03:14:49.060Z",
+  "generatedAt": "2026-08-18T04:33:06.927Z",
   "maxWidth": 1600,
   "quality": 80,
   "originalsUntouched": true,
   "gate": {
     "everyDerivativeSmaller": true,
-    "totalReduction": 1974645
+    "totalReduction": 3205538
   },
   "totals": {
-    "beforeBytes": 2405535,
-    "afterBytes": 430890,
-    "files": 4
+    "beforeBytes": 3889530,
+    "afterBytes": 683992,
+    "files": 5
   },
   "files": [
     {
@@ -70,6 +70,21 @@
       "outWidth": 800,
       "outHeight": 661,
       "formatIn": "png",
+      "formatOut": "webp",
+      "ok": true
+    },
+    {
+      "src": "/media/projects/2564/eco-tourism-route/cover.jpg",
+      "dest": "/media/optimized/projects/2564/eco-tourism-route/cover.webp",
+      "beforeBytes": 1483995,
+      "afterBytes": 253102,
+      "savedBytes": 1230893,
+      "ratio": 0.17055448300027964,
+      "inWidth": 4032,
+      "inHeight": 3024,
+      "outWidth": 1600,
+      "outHeight": 1200,
+      "formatIn": "jpg",
       "formatOut": "webp",
       "ok": true
     }
