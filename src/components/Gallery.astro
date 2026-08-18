@@ -20,13 +20,13 @@ const galleryItems = images.map((src, i) => ({
 }));
 ---
 
-<section class="gallery-story" data-gallery-id={galleryId}>
+<div class="gallery-story" data-gallery-id={galleryId}>
   <div class="gallery-grid grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
     {
       images.map((src, i) => {
         const alt = `${altBase} — ${i + 1}`;
         return (
-          <figure class="gallery-item">
+          <div class="gallery-item">
             <button
               type="button"
               class="gallery-trigger"
@@ -35,8 +35,8 @@ const galleryItems = images.map((src, i) => ({
             >
               <MediaFigure src={src} alt={alt} aspect="4/3" />
             </button>
-            <figcaption class="gallery-caption">{alt}</figcaption>
-          </figure>
+            <p class="gallery-caption">{alt}</p>
+          </div>
         );
       })
     }
@@ -62,7 +62,7 @@ const galleryItems = images.map((src, i) => ({
       </div>
     </div>
   </dialog>
-</section>
+</div>
 
 <script
   type="application/json"

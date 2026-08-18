@@ -90,6 +90,18 @@ try {
   await checkRoute('/activities/2569/biochar-brand/', 'ยุวชนอาสาพัฒนาแบรนด์คนเอาถ่าน', 'TH /activities/2569/biochar-brand/');
   const thProject = await fetchHtml('/activities/2569/biochar-brand/');
   record('TH project story gallery', thProject.html.includes('gallery-story'));
+  record(
+    'TH project without body renders',
+    thProject.html.includes('project-hero-band') && !thProject.html.includes('class="md-body'),
+  );
+  const thBodyLess = await fetchHtml('/activities/2564/fish-hen-farming/');
+  record(
+    'TH body-less project hero + gallery',
+    thBodyLess.status === 200 &&
+      thBodyLess.html.includes('project-hero-band') &&
+      thBodyLess.html.includes('gallery-story') &&
+      !thBodyLess.html.includes('class="md-body'),
+  );
   await checkRoute('/activities/2569/biochar-brand/activity-1/', 'ประชาสัมพันธ์และรับสมัครนักศึกษา', 'TH activity-1');
   const thActivity = await fetchHtml('/activities/2569/biochar-brand/activity-1/');
   record(
