@@ -67,6 +67,13 @@ async function fetchHtml(path) {
   return { status: res.status, html: await res.text() };
 }
 
+function projectHeroHtml(html) {
+  const start = html.indexOf('project-hero-band');
+  if (start === -1) return '';
+  const end = html.indexOf('hero-scrim', start);
+  return end === -1 ? html.slice(start, start + 2500) : html.slice(start, end);
+}
+
 async function checkRoute(path, marker, label = path) {
   const { status, html } = await fetchHtml(path);
   const ok = status === 200 && html.includes(marker);
@@ -80,8 +87,51 @@ try {
   // TH routes
   await checkRoute('/', 'ยุวชนอาสา มหาวิทยาลัยแม่โจ้ เพื่อการพัฒนาชุมชน', 'TH /');
   await checkRoute('/activities/', 'กิจกรรมทั้งหมด', 'TH /activities/');
+  const thActivities = await fetchHtml('/activities/');
+  record(
+    'TH activities timeline',
+    thActivities.html.includes('year-timeline') &&
+      thActivities.html.includes('ปี 2569') &&
+      thActivities.html.includes('ปี 2564'),
+  );
   await checkRoute('/activities/2569/biochar-brand/', 'ยุวชนอาสาพัฒนาแบรนด์คนเอาถ่าน', 'TH /activities/2569/biochar-brand/');
+  const thProject = await fetchHtml('/activities/2569/biochar-brand/');
+  record('TH project story gallery', thProject.html.includes('gallery-story'));
+  record(
+    'TH project without body renders',
+    thProject.html.includes('project-hero-band') && !thProject.html.includes('class="md-body'),
+  );
+  const thBodyLess = await fetchHtml('/activities/2564/fish-hen-farming/');
+  const biocharHero = projectHeroHtml(thProject.html);
+  const fishHero = projectHeroHtml(thBodyLess.html);
+  record(
+    'project hero webp when optimized cover exists',
+    biocharHero.includes('type="image/webp"') &&
+      biocharHero.includes(`${BASE_PATH}/media/optimized/projects/2569/biochar-brand/cover.webp`) &&
+      biocharHero.includes(`${BASE_PATH}/media/projects/2569/biochar-brand/cover.jpg`),
+  );
+  record(
+    'project hero skips missing webp derivative',
+    !fishHero.includes('type="image/webp"') &&
+      !fishHero.includes(`${BASE_PATH}/media/optimized/projects/2564/fish-hen-farming/cover.webp`),
+  );
+  record(
+    'project hero keeps original cover fallback',
+    fishHero.includes(`${BASE_PATH}/media/projects/2564/fish-hen-farming/cover.jpg`),
+  );
+  record(
+    'TH body-less project hero + gallery',
+    thBodyLess.status === 200 &&
+      thBodyLess.html.includes('project-hero-band') &&
+      thBodyLess.html.includes('gallery-story') &&
+      !thBodyLess.html.includes('class="md-body'),
+  );
   await checkRoute('/activities/2569/biochar-brand/activity-1/', 'ประชาสัมพันธ์และรับสมัครนักศึกษา', 'TH activity-1');
+  const thActivity = await fetchHtml('/activities/2569/biochar-brand/activity-1/');
+  record(
+    'TH activity gallery lightbox',
+    thActivity.html.includes('gallery-lightbox') && thActivity.html.includes('gallery-caption'),
+  );
   await checkRoute('/about/', 'เกี่ยวกับเรา', 'TH /about/');
   await checkRoute('/contact/', 'ติดต่อเรา', 'TH /contact/');
   await checkRoute('/documents/', 'เอกสารสาธารณะ', 'TH /documents/');
@@ -90,7 +140,16 @@ try {
   // EN routes
   await checkRoute('/en/', 'Youth Volunteers of Maejo University for Community Development', 'EN /en/');
   await checkRoute('/en/activities/', 'All activities', 'EN /en/activities/');
+  const enActivities = await fetchHtml('/en/activities/');
+  record(
+    'EN activities timeline',
+    enActivities.html.includes('year-timeline') &&
+      enActivities.html.includes('Year 2569') &&
+      enActivities.html.includes('Year 2564'),
+  );
   await checkRoute('/en/activities/2569/biochar-brand/', 'Youth Volunteers: Developing the Khon Ao Than brand', 'EN project');
+  const enProject = await fetchHtml('/en/activities/2569/biochar-brand/');
+  record('EN project story gallery', enProject.html.includes('gallery-story'));
   await checkRoute('/en/activities/2569/biochar-brand/activity-1/', 'Publicity and recruitment of students, along with a study of the Khon Ao Than Community Enterprise', 'EN activity-1');
   await checkRoute('/en/about/', 'About us', 'EN /en/about/');
   await checkRoute('/en/contact/', 'Contact us', 'EN /en/contact/');
@@ -145,6 +204,13 @@ try {
   const jsBundles = astroAssets.filter((f) => f.endsWith('.js'));
   record('no external JS bundles', jsBundles.length === 0, `${jsBundles.length} js file(s)`);
   record('homepage has no external script src', !/<script[^>]+src=/i.test(thHome.html));
+  record(
+    'gallery uses inline script only',
+    thActivity.html.includes('gallery-story') &&
+      thActivity.html.includes('gallery-lightbox') &&
+      /<script[^>]*>\s*\(function \(\)/.test(thActivity.html) &&
+      !thActivity.html.match(/<script[^>]+src=/i),
+  );
   record(
     'self-hosted Sarabun emitted',
     astroAssets.some((f) => /sarabun/i.test(f)),

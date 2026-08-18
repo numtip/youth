@@ -1,12 +1,15 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../Breadcrumbs.astro';
-import MediaFigure from '../MediaFigure.astro';
+import Gallery from '../Gallery.astro';
 import ActivityCard from '../ActivityCard.astro';
 import { getLocale, localeHref, ui } from '../../i18n';
 import { getPublishedActivities, localizeEntry } from '../../lib/content';
+import { withBase } from '../../lib/site';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -24,6 +27,24 @@ const activities = (await getPublishedActivities()).filter(
 const hasStory = Boolean(project.body?.trim());
 const { Content } = hasStory ? await render(project) : { Content: null };
 
+const activityImages = activities.flatMap((a) => a.data.gallery);
+const seen = new Set<string>();
+const photoStory: string[] = [];
+for (const src of [project.data.cover, ...activityImages]) {
+  if (src && !seen.has(src)) {
+    seen.add(src);
+    photoStory.push(src);
+  }
+}
+
+const cover = project.data.cover;
+const coverWebp =
+  cover.startsWith('/media/')
+    ? `/media/optimized/${cover.slice('/media/'.length).replace(/\.[^.]+$/, '.webp')}`
+    : undefined;
+const coverWebpAbs = coverWebp ? join(process.cwd(), 'public', coverWebp.replace(/^\/+/, '')) : undefined;
+const hasCoverWebp = Boolean(coverWebpAbs && existsSync(coverWebpAbs));
+
 const activitiesHref = localeHref(locale, 'activities');
 const crumbs = [
   { label: t.breadcrumbs.home, href: localeHref(locale, '') },
@@ -33,12 +54,45 @@ const crumbs = [
 ---
 
 <BaseLayout title={title} description={summary}>
-  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+  <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
     <Breadcrumbs items={crumbs} />
+  </div>
 
-    <article class="mt-6 grid gap-8 lg:grid-cols-2">
-      <MediaFigure src={project.data.cover} alt={title} aspect="4/3" class="rounded-xl" />
-      <div>
+  <section class="project-hero-band relative mt-6 overflow-hidden bg-emerald-900">
+    <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+      {
+        hasCoverWebp && coverWebp ? (
+          <picture>
+            <source type="image/webp" srcset={withBase(coverWebp)} />
+            <img
+              src={withBase(cover)}
+              alt=""
+              aria-hidden="true"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              class="absolute inset-0 h-full w-full object-cover object-center"
+            />
+          </picture>
+        ) : (
+          <img
+            src={withBase(cover)}
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="absolute inset-0 h-full w-full object-cover object-center"
+          />
+        )
+      }
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+  </section>
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <article>
+      <header>
         <span class="rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-800">
           {t.activities.year} {project.data.year}
         </span>
@@ -47,39 +101,50 @@ const crumbs = [
         <a href={activitiesHref} class="mt-6 inline-block text-sm font-medium text-emerald-700 hover:underline">
           ← {t.project.back}
         </a>
-      </div>
-    </article>
+      </header>
 
-    {
-      Content && (
-        <div class="md-body mt-10 max-w-3xl text-stone-700">
-          <Content />
-        </div>
-      )
-    }
-
-    <section class="mt-12">
-      <h2 class="text-2xl font-bold text-stone-900">{t.project.activities}</h2>
       {
-        activities.length === 0 ? (
-          <p class="mt-4 rounded-lg border border-dashed border-stone-300 p-8 text-center text-stone-500">
-            {t.project.empty}
-          </p>
-        ) : (
-          <div class="mt-6 space-y-3">
-            {activities.map((activity) => {
-              const a = localizeEntry(locale, activity.data);
-              return (
-                <ActivityCard
-                  title={a.title}
-                  summary={a.summary}
-                  href={localeHref(locale, `activities/${activity.data.year}/${activity.data.project}/${activity.data.slug}`)}
-                />
-              );
-            })}
+        Content && (
+          <div class="md-body mt-10 max-w-3xl text-stone-700">
+            <Content />
           </div>
         )
       }
-    </section>
+
+      <section class="mt-12">
+        <h2 class="text-2xl font-bold text-stone-900">{t.project.activities}</h2>
+        {
+          activities.length === 0 ? (
+            <p class="mt-4 rounded-lg border border-dashed border-stone-300 p-8 text-center text-stone-500">
+              {t.project.empty}
+            </p>
+          ) : (
+            <div class="mt-6 space-y-3">
+              {activities.map((activity) => {
+                const a = localizeEntry(locale, activity.data);
+                return (
+                  <ActivityCard
+                    title={a.title}
+                    summary={a.summary}
+                    href={localeHref(locale, `activities/${activity.data.year}/${activity.data.project}/${activity.data.slug}`)}
+                  />
+                );
+              })}
+            </div>
+          )
+        }
+      </section>
+
+      {
+        photoStory.length > 0 && (
+          <section class="mt-12">
+            <h2 class="text-2xl font-bold text-stone-900">{t.activity.gallery}</h2>
+            <div class="mt-6">
+              <Gallery images={photoStory} altBase={title} />
+            </div>
+          </section>
+        )
+      }
+    </article>
   </div>
 </BaseLayout>

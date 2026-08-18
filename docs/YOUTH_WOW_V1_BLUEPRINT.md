@@ -274,13 +274,13 @@ No CDN required; GH Pages static output stays the deploy target.
 
 ## 13. Performance budgets
 
-Measured on the Phase B CSS gate (local `npm run build`, 2026-08-18):
+Measured on the Phase C exit (local `npm run build`, 2026-08-18):
 
 | Budget | Target | Current (baseline) |
 | --- | --- | --- |
 | Total static output | ≤ 100 MB after optimization | ~221 MB |
 | Max image per page (gallery) | ≤ 250 KB avg, ≤ 1 MB worst | up to 1.5 MB |
-| CSS per page | ≤ 30 KB | 27.9 KB |
+| CSS per page | ≤ 34 KB | 32.4 KB |
 | JS (external) per page | 0 KB | 0 KB (inline only) |
 | HTML per page | ≤ 40 KB | ~10–21 KB |
 | `npm run build` time | ≤ 30 s | ~15 s |
@@ -313,6 +313,20 @@ the Phase A sticky-header blur. Honest Phase B add after waste removal is
 
 Do not re-introduce Tailwind gradient utilities on the hero; keep the scrim
 as a single component class.
+
+### CSS budget revision (Phase C — not a silent waiver)
+
+Phase B exit was **27.9 KB**. The Phase B gate reserved ~2.1 KB for Phase C;
+that was insufficient for three story surfaces.
+
+Phase C adds component CSS in `global.css` only (no new Tailwind utilities):
+year timeline (~110 lines), gallery `<dialog>` lightbox (~150 lines), project
+hero band (~10 lines). First land: **33.6 KB** (+5.7 KB). After trimming
+hover/animation duplication: **32.4 KB** (+4.5 KB honest add).
+
+**≤ 30 KB is not technically sensible** without removing the lightbox chrome,
+timeline rail, or captions. Revised gate: **≤ 34 KB** (33,194 bytes measured).
+Gallery lightbox remains inline-script only; no external JS bundle.
 
 ---
 

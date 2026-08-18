@@ -1,5 +1,7 @@
 ---
 import MediaFigure from './MediaFigure.astro';
+import { getLocale, ui } from '../i18n';
+import { withBase } from '../lib/site';
 
 interface Props {
   images: string[];
@@ -7,10 +9,159 @@ interface Props {
 }
 
 const { images, altBase } = Astro.props;
+const locale = getLocale(Astro.currentLocale);
+const g = ui[locale].gallery;
+
+const galleryId = `gallery-${images.length}-${altBase.slice(0, 24).replace(/[^a-zA-Z0-9\u0E00-\u0E7F]+/g, '-')}`;
+
+const galleryItems = images.map((src, i) => ({
+  src: withBase(src),
+  alt: `${altBase} — ${i + 1}`,
+}));
 ---
 
-<div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-  {images.map((src, i) => (
-    <MediaFigure src={src} alt={`${altBase} — ${i + 1}`} aspect="4/3" />
-  ))}
+<div class="gallery-story" data-gallery-id={galleryId}>
+  <div class="gallery-grid grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    {
+      images.map((src, i) => {
+        const alt = `${altBase} — ${i + 1}`;
+        return (
+          <div class="gallery-item">
+            <button
+              type="button"
+              class="gallery-trigger"
+              data-index={i}
+              aria-label={`${g.view}: ${alt}`}
+            >
+              <MediaFigure src={src} alt={alt} aspect="4/3" />
+            </button>
+            <p class="gallery-caption">{alt}</p>
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <dialog class="gallery-lightbox" aria-label={g.dialogLabel}>
+    <div class="gallery-lightbox-panel">
+      <button type="button" class="gallery-lightbox-close" aria-label={g.close}>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <p class="gallery-lightbox-counter" aria-live="polite" aria-atomic="true"></p>
+      <div class="gallery-lightbox-stage">
+        <button type="button" class="gallery-lightbox-prev" aria-label={g.prev}>
+          <span aria-hidden="true">&lsaquo;</span>
+        </button>
+        <figure class="gallery-lightbox-figure">
+          <img class="gallery-lightbox-img" alt="" decoding="async" />
+          <figcaption class="gallery-lightbox-caption"></figcaption>
+        </figure>
+        <button type="button" class="gallery-lightbox-next" aria-label={g.next}>
+          <span aria-hidden="true">&rsaquo;</span>
+        </button>
+      </div>
+    </div>
+  </dialog>
 </div>
+
+<script
+  type="application/json"
+  id={`gallery-data-${galleryId}`}
+  is:inline
+  set:html={JSON.stringify({ items: galleryItems })}
+></script>
+<script is:inline>
+  (function () {
+    document.querySelectorAll('.gallery-story:not([data-gallery-init])').forEach(function (root) {
+      root.setAttribute('data-gallery-init', '');
+      var galleryId = root.getAttribute('data-gallery-id');
+      var dataEl = document.getElementById('gallery-data-' + galleryId);
+      if (!dataEl) return;
+
+      var items = JSON.parse(dataEl.textContent).items;
+      if (!items.length) return;
+
+      var dialog = root.querySelector('.gallery-lightbox');
+      var imgEl = root.querySelector('.gallery-lightbox-img');
+      var captionEl = root.querySelector('.gallery-lightbox-caption');
+      var counterEl = root.querySelector('.gallery-lightbox-counter');
+      var closeBtn = root.querySelector('.gallery-lightbox-close');
+      var prevBtn = root.querySelector('.gallery-lightbox-prev');
+      var nextBtn = root.querySelector('.gallery-lightbox-next');
+      var triggers = root.querySelectorAll('.gallery-trigger');
+
+      var currentIndex = 0;
+      var lastTrigger = null;
+
+      function updateSlide() {
+        var item = items[currentIndex];
+        imgEl.src = item.src;
+        imgEl.alt = item.alt;
+        captionEl.textContent = item.alt;
+        counterEl.textContent = currentIndex + 1 + ' / ' + items.length;
+        var single = items.length <= 1;
+        prevBtn.disabled = single;
+        nextBtn.disabled = single;
+      }
+
+      function open(index, trigger) {
+        currentIndex = index;
+        lastTrigger = trigger;
+        updateSlide();
+        dialog.showModal();
+        closeBtn.focus();
+      }
+
+      function close() {
+        dialog.close();
+      }
+
+      function goPrev() {
+        if (items.length <= 1) return;
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateSlide();
+      }
+
+      function goNext() {
+        if (items.length <= 1) return;
+        currentIndex = (currentIndex + 1) % items.length;
+        updateSlide();
+      }
+
+      triggers.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var idx = parseInt(btn.getAttribute('data-index'), 10);
+          if (Number.isNaN(idx)) return;
+          open(idx, btn);
+        });
+      });
+
+      closeBtn.addEventListener('click', close);
+      prevBtn.addEventListener('click', goPrev);
+      nextBtn.addEventListener('click', goNext);
+
+      dialog.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          goPrev();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          goNext();
+        }
+      });
+
+      dialog.addEventListener('close', function () {
+        if (lastTrigger) {
+          lastTrigger.focus();
+          lastTrigger = null;
+        }
+      });
+
+      dialog.addEventListener('click', function (e) {
+        if (e.target === dialog) {
+          close();
+        }
+      });
+    });
+  })();
+</script>
