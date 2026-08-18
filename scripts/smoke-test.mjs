@@ -67,6 +67,13 @@ async function fetchHtml(path) {
   return { status: res.status, html: await res.text() };
 }
 
+function projectHeroHtml(html) {
+  const start = html.indexOf('project-hero-band');
+  if (start === -1) return '';
+  const end = html.indexOf('hero-scrim', start);
+  return end === -1 ? html.slice(start, start + 2500) : html.slice(start, end);
+}
+
 async function checkRoute(path, marker, label = path) {
   const { status, html } = await fetchHtml(path);
   const ok = status === 200 && html.includes(marker);
@@ -95,6 +102,23 @@ try {
     thProject.html.includes('project-hero-band') && !thProject.html.includes('class="md-body'),
   );
   const thBodyLess = await fetchHtml('/activities/2564/fish-hen-farming/');
+  const biocharHero = projectHeroHtml(thProject.html);
+  const fishHero = projectHeroHtml(thBodyLess.html);
+  record(
+    'project hero webp when optimized cover exists',
+    biocharHero.includes('type="image/webp"') &&
+      biocharHero.includes(`${BASE_PATH}/media/optimized/projects/2569/biochar-brand/cover.webp`) &&
+      biocharHero.includes(`${BASE_PATH}/media/projects/2569/biochar-brand/cover.jpg`),
+  );
+  record(
+    'project hero skips missing webp derivative',
+    !fishHero.includes('type="image/webp"') &&
+      !fishHero.includes(`${BASE_PATH}/media/optimized/projects/2564/fish-hen-farming/cover.webp`),
+  );
+  record(
+    'project hero keeps original cover fallback',
+    fishHero.includes(`${BASE_PATH}/media/projects/2564/fish-hen-farming/cover.jpg`),
+  );
   record(
     'TH body-less project hero + gallery',
     thBodyLess.status === 200 &&
