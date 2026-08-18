@@ -1,0 +1,33 @@
+---
+import type { Ui } from '../i18n';
+import type { ImpactTotals } from '../lib/content';
+
+interface Props {
+  totals: ImpactTotals;
+  labels: Ui['home']['impact'];
+}
+
+const { totals, labels } = Astro.props;
+
+const items = [
+  { value: totals.projects, label: labels.projects },
+  { value: totals.activities, label: labels.activities },
+  { value: totals.years, label: labels.years },
+  { value: totals.media, label: labels.photos },
+];
+---
+
+<section class="bg-emerald-800 text-white">
+  <dl class="mx-auto grid max-w-6xl grid-cols-2 lg:grid-cols-4">
+    {
+      items.map((item) => (
+        <div class="flex flex-col-reverse items-center px-4 py-8 text-center sm:py-10">
+          <dt class="mt-1 text-sm font-medium text-emerald-100">{item.label}</dt>
+          <dd class="text-3xl font-bold tabular-nums tracking-tight sm:text-4xl">
+            {item.value.toLocaleString('en-US')}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

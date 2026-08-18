@@ -13,4 +13,5 @@ sources:
   - title: "Legacy Joomla source"
     url: "/youth/index.php/activity/36-youth-biochar-2569"
 order: 10
+featured: true
 ---

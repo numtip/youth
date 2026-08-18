@@ -13,4 +13,5 @@ sources:
   - title: "Legacy Joomla source"
     url: "https://researchex.mju.ac.th/youth/index.php/activity/32-organic-vegetable2025"
 order: 10
+featured: true
 ---

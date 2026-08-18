@@ -116,6 +116,21 @@ try {
     `base="${BASE_PATH || '/'}"`,
   );
 
+  record('TH home has featured stories', thHome.html.includes('เรื่องเด่น') && thHome.html.includes('biochar-brand'));
+  record('EN home has featured stories', enHome.html.includes('Featured stories'));
+  record(
+    'impact totals rendered from collections',
+    thHome.html.includes('โครงการ') &&
+      thHome.html.includes('กิจกรรม') &&
+      thHome.html.includes('ปีการศึกษา') &&
+      thHome.html.includes('ภาพถ่าย'),
+  );
+  record(
+    'hero uses optimized photography',
+    thHome.html.includes('type="image/webp"') &&
+      thHome.html.includes(`${BASE_PATH}/media/optimized/projects/2568/arabica-coffee/cover.webp`),
+  );
+
   // Search payload (client-side search data is embedded)
   record(
     'search: TH payload present',

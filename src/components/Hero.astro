@@ -1,0 +1,108 @@
+---
+import { withBase } from '../lib/site';
+
+interface Props {
+  title: string;
+  tagline: string;
+  subtitle: string;
+  ctaLabel: string;
+  ctaHref: string;
+  chips: { value: number; label: string }[];
+}
+
+const { title, tagline, subtitle, ctaLabel, ctaHref, chips } = Astro.props;
+
+const photoJpg = withBase('/media/projects/2568/arabica-coffee/cover.jpg');
+const photoWebp = withBase('/media/optimized/projects/2568/arabica-coffee/cover.webp');
+---
+
+<section
+  class="relative min-h-[32rem] overflow-hidden bg-emerald-900 text-white sm:min-h-[70vh]"
+  aria-labelledby="hero-heading"
+>
+  <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
+    <picture>
+      <source type="image/webp" srcset={photoWebp} />
+      <img
+        src={photoJpg}
+        alt=""
+        aria-hidden="true"
+        loading="eager"
+        fetchpriority="high"
+        width="800"
+        height="600"
+        decoding="async"
+        class="hero-ken-burns absolute inset-0 h-full w-full object-cover object-center"
+      />
+    </picture>
+  </div>
+
+  <div
+    class="pointer-events-none absolute inset-0 bg-gradient-to-b from-emerald-950/90 via-emerald-950/80 to-emerald-950/85"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-950/50 via-emerald-950/20 to-transparent"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-emerald-950/90 to-transparent"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="relative mx-auto flex min-h-[32rem] max-w-6xl flex-col px-4 pt-16 pb-20 sm:min-h-[70vh] sm:px-6 sm:pt-24 sm:pb-24"
+  >
+    <div class="flex flex-1 flex-col justify-center">
+      <p class="hero-enter mb-3 text-sm font-medium text-emerald-50">{tagline}</p>
+      <h1
+        id="hero-heading"
+        class="hero-enter hero-enter-delay-1 max-w-3xl text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl"
+      >
+        {title}
+      </h1>
+      <p class="hero-enter hero-enter-delay-2 mt-4 max-w-2xl text-white">{subtitle}</p>
+      <a
+        href={ctaHref}
+        class="hero-enter hero-enter-delay-3 mt-8 inline-block self-start rounded-lg bg-white px-5 py-3 font-semibold text-emerald-800 transition-colors hover:bg-emerald-50"
+      >
+        {ctaLabel}
+      </a>
+    </div>
+
+    {
+      chips.length > 0 && (
+        <ul
+          class="hero-enter hero-enter-delay-4 mt-10 flex list-none flex-wrap gap-2 sm:mt-12 sm:gap-3"
+          role="list"
+        >
+          {chips.map((chip) => (
+            <li>
+              <span
+                class="inline-flex items-baseline gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-[2px]"
+                aria-label={`${chip.value} ${chip.label}`}
+              >
+                <span class="text-base font-bold tabular-nums sm:text-lg">{chip.value}</span>
+                <span class="text-sm text-emerald-50">{chip.label}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+
+  <div class="pointer-events-none absolute inset-x-0 bottom-4 flex justify-center sm:bottom-5" aria-hidden="true">
+    <svg
+      class="hero-scroll-cue h-6 w-6 text-white/80"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M6 9l6 6 6-6"></path>
+    </svg>
+  </div>
+</section>

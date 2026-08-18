@@ -35,6 +35,12 @@ export async function getPublishedProjects() {
   });
 }
 
+/** Published projects flagged `featured: true`, in the same year/order sort. */
+export async function getFeaturedProjects() {
+  const projects = await getPublishedProjects();
+  return projects.filter((project) => project.data.featured === true);
+}
+
 export async function getPublishedActivities() {
   const activities = await getCollection('activities', ({ data }) => data.status === 'published');
   return activities.sort((a, b) => {

@@ -18,7 +18,18 @@ export interface Ui {
   };
   lang: { th: string; en: string };
   hero: { title: string; subtitle: string; cta: string };
-  home: { latest: string; viewAll: string; empty: string };
+  home: {
+    latest: string;
+    viewAll: string;
+    empty: string;
+    featured: string;
+    impact: {
+      projects: string;
+      activities: string;
+      years: string;
+      photos: string;
+    };
+  };
   activities: { title: string; subtitle: string; year: string; empty: string };
   project: { activities: string; empty: string; back: string };
   activity: { details: string; gallery: string; sources: string; date: string; sequence: string; back: string };
@@ -51,7 +62,18 @@ export const ui: Record<Locale, Ui> = {
       subtitle: 'ร่วมเรียนรู้และลงมือพัฒนาผลิตภัณฑ์และเศรษฐกิจท้องถิ่น ผ่านโครงการยุวชนอาสาของมหาวิทยาลัย',
       cta: 'ดูกิจกรรมทั้งหมด',
     },
-    home: { latest: 'โครงการล่าสุด', viewAll: 'ดูกิจกรรมทั้งหมด', empty: 'ยังไม่มีโครงการที่เผยแพร่' },
+    home: {
+      latest: 'โครงการล่าสุด',
+      viewAll: 'ดูกิจกรรมทั้งหมด',
+      empty: 'ยังไม่มีโครงการที่เผยแพร่',
+      featured: 'เรื่องเด่น',
+      impact: {
+        projects: 'โครงการ',
+        activities: 'กิจกรรม',
+        years: 'ปีการศึกษา',
+        photos: 'ภาพถ่าย',
+      },
+    },
     activities: {
       title: 'กิจกรรมทั้งหมด',
       subtitle: 'รวมโครงการและกิจกรรมยุวชนอาสา เรียงตามปีการศึกษา',
@@ -122,7 +144,18 @@ export const ui: Record<Locale, Ui> = {
         'Learn and take action to develop local products and economy through university youth volunteer projects.',
       cta: 'View all activities',
     },
-    home: { latest: 'Latest projects', viewAll: 'View all activities', empty: 'No published projects yet' },
+    home: {
+      latest: 'Latest projects',
+      viewAll: 'View all activities',
+      empty: 'No published projects yet',
+      featured: 'Featured stories',
+      impact: {
+        projects: 'Projects',
+        activities: 'Activities',
+        years: 'Academic years',
+        photos: 'Photos',
+      },
+    },
     activities: {
       title: 'All activities',
       subtitle: 'All youth volunteer projects and activities, ordered by academic year',

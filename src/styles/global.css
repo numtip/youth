@@ -228,3 +228,91 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* WOW-V1 Phase B — cinematic hero motion. Class-based so the global
+   prefers-reduced-motion rule above disables Ken-Burns, entrance, and bounce. */
+@keyframes hero-ken-burns {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(0.35rem);
+  }
+}
+
+.hero-ken-burns {
+  animation-name: hero-ken-burns;
+  animation-duration: 18s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.hero-enter {
+  animation-name: hero-enter;
+  animation-duration: var(--duration-enter);
+  animation-timing-function: var(--ease-out-soft);
+  animation-fill-mode: both;
+}
+
+.hero-enter-delay-1 {
+  animation-delay: 90ms;
+}
+
+.hero-enter-delay-2 {
+  animation-delay: 180ms;
+}
+
+.hero-enter-delay-3 {
+  animation-delay: 270ms;
+}
+
+.hero-enter-delay-4 {
+  animation-delay: 360ms;
+}
+
+.hero-scroll-cue {
+  animation-name: hero-scroll-cue;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* Zero delays and freeze Ken-Burns end-state; the global duration rule
+   alone would still wait on animation-delay and keep scale(1.06). */
+@media (prefers-reduced-motion: reduce) {
+  .hero-ken-burns,
+  .hero-enter,
+  .hero-enter-delay-1,
+  .hero-enter-delay-2,
+  .hero-enter-delay-3,
+  .hero-enter-delay-4,
+  .hero-scroll-cue {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
