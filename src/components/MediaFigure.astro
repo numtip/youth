@@ -17,6 +17,14 @@ const { src, alt, class: className = '', aspect = '4/3' } = Astro.props;
 const clean = src.replace(/^\/+/, '');
 const absolute = join(process.cwd(), 'public', clean);
 const missing = !existsSync(absolute);
+
+// Additive WebP derivative from the Phase A optimizer. Originals stay in
+// place; if the derivative is missing we serve the original unchanged.
+const webpSrc = src.startsWith('/media/')
+  ? `/media/optimized/${src.slice('/media/'.length).replace(/\.[^.]+$/, '.webp')}`
+  : undefined;
+const webpAbs = webpSrc ? join(process.cwd(), 'public', webpSrc.replace(/^\/+/, '')) : undefined;
+const hasWebp = Boolean(webpAbs && existsSync(webpAbs));
 ---
 
 <figure class:list={['media-figure', className]} data-aspect={aspect}>
@@ -24,6 +32,11 @@ const missing = !existsSync(absolute);
     <figcaption class="media-placeholder" aria-label={alt}>
       <span>{alt}</span>
     </figcaption>
+  ) : hasWebp && webpSrc ? (
+    <picture>
+      <source type="image/webp" srcset={withBase(webpSrc)} />
+      <img src={withBase(src)} alt={alt} loading="lazy" decoding="async" />
+    </picture>
   ) : (
     <img src={withBase(src)} alt={alt} loading="lazy" decoding="async" />
   )}

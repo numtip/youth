@@ -47,6 +47,7 @@ const projects = defineCollection({
     .object({
       ...baseFields,
       order: z.number().int().positive(),
+      featured: z.boolean().default(false),
     })
     .refine((data) => data.status !== 'published' || data.sources.length > 0, publishedNeedsReference),
 });

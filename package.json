@@ -12,6 +12,8 @@
     "build": "npm run validate && astro build",
     "preview": "astro preview",
     "test:smoke": "node scripts/smoke-test.mjs",
+    "audit:images": "node scripts/audit-images.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "astro": "astro"
   },
   "dependencies": {
@@ -23,6 +25,7 @@
     "@astrojs/check": "^0.9.10",
     "@types/node": "^26.2.0",
     "js-yaml": "^5.2.3",
+    "sharp": "^0.35.3",
     "typescript": "^6.0.3"
   }
 }

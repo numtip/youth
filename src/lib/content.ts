@@ -44,6 +44,41 @@ export async function getPublishedActivities() {
   });
 }
 
+export type ImpactTotals = {
+  projects: number;
+  activities: number;
+  years: number;
+  media: number;
+};
+
+/**
+ * Build-time aggregates from published collections only.
+ * Never hard-code these numbers in templates — call this helper.
+ */
+export async function getImpactTotals(): Promise<ImpactTotals> {
+  const projects = await getPublishedProjects();
+  const activities = await getPublishedActivities();
+  const years = new Set<number>();
+  const media = new Set<string>();
+
+  for (const project of projects) {
+    years.add(project.data.year);
+    media.add(project.data.cover);
+  }
+  for (const activity of activities) {
+    years.add(activity.data.year);
+    media.add(activity.data.cover);
+    for (const src of activity.data.gallery) media.add(src);
+  }
+
+  return {
+    projects: projects.length,
+    activities: activities.length,
+    years: years.size,
+    media: media.size,
+  };
+}
+
 export function formatEventDate(locale: Locale, date: Date): string {
   return new Intl.DateTimeFormat(locale === 'en' ? 'en-GB' : 'th-TH', {
     year: 'numeric',

@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-08-18T03:14:49.060Z",
+  "maxWidth": 1600,
+  "quality": 80,
+  "originalsUntouched": true,
+  "gate": {
+    "everyDerivativeSmaller": true,
+    "totalReduction": 1974645
+  },
+  "totals": {
+    "beforeBytes": 2405535,
+    "afterBytes": 430890,
+    "files": 4
+  },
+  "files": [
+    {
+      "src": "/media/brand/hero-banner.jpg",
+      "dest": "/media/optimized/brand/hero-banner.webp",
+      "beforeBytes": 299919,
+      "afterBytes": 50318,
+      "savedBytes": 249601,
+      "ratio": 0.16777196509724293,
+      "inWidth": 1600,
+      "inHeight": 500,
+      "outWidth": 1600,
+      "outHeight": 500,
+      "formatIn": "jpg",
+      "formatOut": "webp",
+      "ok": true
+    },
+    {
+      "src": "/media/projects/2569/biochar-brand/cover.jpg",
+      "dest": "/media/optimized/projects/2569/biochar-brand/cover.webp",
+      "beforeBytes": 440172,
+      "afterBytes": 195110,
+      "savedBytes": 245062,
+      "ratio": 0.4432585443871941,
+      "inWidth": 1108,
+      "inHeight": 1477,
+      "outWidth": 1108,
+      "outHeight": 1477,
+      "formatIn": "jpg",
+      "formatOut": "webp",
+      "ok": true
+    },
+    {
+      "src": "/media/projects/2568/arabica-coffee/cover.jpg",
+      "dest": "/media/optimized/projects/2568/arabica-coffee/cover.webp",
+      "beforeBytes": 143667,
+      "afterBytes": 110818,
+      "savedBytes": 32849,
+      "ratio": 0.7713531987164763,
+      "inWidth": 800,
+      "inHeight": 600,
+      "outWidth": 800,
+      "outHeight": 600,
+      "formatIn": "jpg",
+      "formatOut": "webp",
+      "ok": true
+    },
+    {
+      "src": "/media/projects/2568/organic-vegetable/activity-3/Screenshot_2025-08-09_164647.png",
+      "dest": "/media/optimized/projects/2568/organic-vegetable/activity-3/Screenshot_2025-08-09_164647.webp",
+      "beforeBytes": 1521777,
+      "afterBytes": 74644,
+      "savedBytes": 1447133,
+      "ratio": 0.0490505507705794,
+      "inWidth": 800,
+      "inHeight": 661,
+      "outWidth": 800,
+      "outHeight": 661,
+      "formatIn": "png",
+      "formatOut": "webp",
+      "ok": true
+    }
+  ]
+}
