@@ -22,7 +22,7 @@ const links = [
       <span>{t.siteName}</span>
     </a>
 
-    <nav aria-label={t.nav.home} class="order-3 flex w-full flex-wrap items-center gap-x-5 gap-y-1 sm:order-2 sm:w-auto">
+    <nav aria-label={t.nav.primaryLabel} class="order-3 flex w-full flex-wrap items-center gap-x-5 gap-y-1 sm:order-2 sm:w-auto">
       {links.map((link) => (
         <a href={link.href} class="text-sm font-medium text-stone-600 transition-colors hover:text-emerald-700">{link.label}</a>
       ))}

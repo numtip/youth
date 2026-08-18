@@ -10,6 +10,8 @@ export interface Ui {
   skipToContent: string;
   nav: {
     home: string;
+    primaryLabel: string;
+    languageLabel: string;
     activities: string;
     documents: string;
     about: string;
@@ -45,7 +47,7 @@ export interface Ui {
   contact: { title: string; intro: string };
   search: { title: string; placeholder: string; button: string; initial: string; empty: string; results: string };
   notFound: { title: string; message: string; back: string };
-  breadcrumbs: { home: string };
+  breadcrumbs: { home: string; label: string };
   footer: { tagline: string; rights: string };
   meta: { description: string };
 }
@@ -57,6 +59,8 @@ export const ui: Record<Locale, Ui> = {
     skipToContent: 'ข้ามไปยังเนื้อหา',
     nav: {
       home: 'หน้าแรก',
+      primaryLabel: 'เมนูหลัก',
+      languageLabel: 'เลือกภาษา',
       activities: 'กิจกรรม',
       documents: 'เอกสาร',
       about: 'เกี่ยวกับเรา',
@@ -136,7 +140,7 @@ export const ui: Record<Locale, Ui> = {
       message: 'หน้าที่คุณค้นหาไม่มีอยู่ หรือถูกย้ายไปแล้ว',
       back: 'กลับสู่หน้าแรก',
     },
-    breadcrumbs: { home: 'หน้าแรก' },
+    breadcrumbs: { home: 'หน้าแรก', label: 'เส้นทางนำทาง' },
     footer: { tagline: 'เผยแพร่โครงการและกิจกรรมยุวชนอาสา มหาวิทยาลัยแม่โจ้', rights: 'สงวนลิขสิทธิ์' },
     meta: { description: 'โครงการและกิจกรรมยุวชนอาสา มหาวิทยาลัยแม่โจ้ เพื่อการพัฒนาชุมชนท้องถิ่น' },
   },
@@ -146,6 +150,8 @@ export const ui: Record<Locale, Ui> = {
     skipToContent: 'Skip to content',
     nav: {
       home: 'Home',
+      primaryLabel: 'Main navigation',
+      languageLabel: 'Select language',
       activities: 'Activities',
       documents: 'Documents',
       about: 'About',
@@ -226,7 +232,7 @@ export const ui: Record<Locale, Ui> = {
       message: 'The page you are looking for does not exist or has been moved.',
       back: 'Back to home',
     },
-    breadcrumbs: { home: 'Home' },
+    breadcrumbs: { home: 'Home', label: 'Breadcrumb' },
     footer: { tagline: 'Publishing Maejo University youth volunteer projects and activities', rights: 'All rights reserved' },
     meta: { description: 'Youth volunteer projects and activities of Maejo University for local community development' },
   },

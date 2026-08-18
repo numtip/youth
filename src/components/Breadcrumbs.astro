@@ -1,4 +1,6 @@
 ---
+import { getLocale, ui } from '../i18n';
+
 interface Crumb {
   label: string;
   href?: string;
@@ -9,9 +11,10 @@ interface Props {
 }
 
 const { items } = Astro.props;
+const t = ui[getLocale(Astro.currentLocale)];
 ---
 
-<nav aria-label="Breadcrumb" class="text-sm">
+<nav aria-label={t.breadcrumbs.label} class="text-sm">
   <ol class="flex flex-wrap items-center gap-1.5 text-stone-500">
     {
       items.map((item, i) => (
