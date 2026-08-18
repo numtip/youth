@@ -112,9 +112,17 @@ body {
 }
 
 /* Card-wide links fill their card's padding box, and the card clips overflow to
-   round the cover image, so an outward-offset ring is clipped away entirely. */
+   round the cover image, so an outward-offset ring is clipped away entirely.
+   The radius keeps the inset ring's corners from being cut by that same clip. */
 .card-link:focus-visible {
   outline-offset: -2px;
+  border-radius: 0.625rem;
+}
+
+/* Focus target for the skip link, not a control: a ring here would outline the
+   whole page, and Chrome carries keyboard modality over from the skip link. */
+main[tabindex='-1']:focus-visible {
+  outline: none;
 }
 
 .skip-link {
@@ -470,9 +478,11 @@ body {
     grid-column: 1;
   }
 
+  /* Both rows are implicit here, so `-1` would resolve to explicit line 1 and
+     collapse the rail to a stub. Span the two rows explicitly instead. */
   .year-timeline__item:not(:last-child)::after {
     grid-column: 1;
-    grid-row: 1 / -1;
+    grid-row: 1 / span 2;
   }
 
   .year-timeline__content {
