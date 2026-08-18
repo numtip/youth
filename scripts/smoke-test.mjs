@@ -1,9 +1,11 @@
 import { spawn } from 'node:child_process';
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from './lib/content.mjs';
 
 const DIST = join(ROOT, 'dist');
+// Phase C revised ceiling (docs/YOUTH_WOW_V1_BLUEPRINT.md §13): 34 KB.
+const CSS_BUDGET_BYTES = 34 * 1024;
 const PORT = 4323;
 const ORIGIN = `http://127.0.0.1:${PORT}`;
 
@@ -216,6 +218,16 @@ try {
     astroAssets.some((f) => /sarabun/i.test(f)),
   );
 
+  const cssFiles = astroAssets.filter((f) => f.endsWith('.css'));
+  const cssBytes = cssFiles.reduce((sum, f) => sum + statSync(f).size, 0);
+  record(
+    'CSS within budget',
+    cssBytes <= CSS_BUDGET_BYTES,
+    `${cssBytes} B of ${CSS_BUDGET_BYTES} B in ${cssFiles.length} file(s)`,
+  );
+  const stylesheetLinks = (thHome.html.match(/rel="stylesheet"/g) || []).length;
+  record('single stylesheet per page', stylesheetLinks === 1, `${stylesheetLinks} link(s)`);
+
   // 404 for unknown route
   const nf = await fetchHtml('/this-route-does-not-exist-xyz/');
   record('404 for unknown TH route', nf.status === 404, `status ${nf.status}`);
@@ -223,10 +235,13 @@ try {
   record('404 for unknown EN route', nfEn.status === 404, `status ${nfEn.status}`);
 } catch (err) {
   console.error('\nSmoke test error:', err.message);
+  // Without this the run reports "0/0 passed" and exits 0, so a harness failure
+  // would look like a green gate.
+  record('smoke harness ran to completion', false, err.message);
 } finally {
   child.kill();
 }
 
 const failed = results.filter((r) => !r.ok).length;
 console.log(`\n${results.length - failed}/${results.length} smoke checks passed.`);
-process.exit(failed ? 1 : 0);
+process.exit(failed || results.length === 0 ? 1 : 0);
