@@ -1,8 +1,10 @@
 # Youth Next — WOW-V1 Blueprint
 
-> Status: **approved for planning only — no implementation yet.**
-> Base commit: `e7d5147` (`main`, synced 2026-08-18). Live preview gate:
-> https://numtip.github.io/youth/
+> Status: **WOW-V1 RELEASED / PRODUCTION-CONFIRMED**
+> Release date: 2026-08-18
+> Production commit: `eb182f273e302ffaad4bd9cb88a76c3d259df4fc`
+> Live URL: https://numtip.github.io/youth/
+> Closeout record: [`docs/releases/YOUTH_WOW_V1_RELEASE_CLOSEOUT_2026-08-18.md`](releases/YOUTH_WOW_V1_RELEASE_CLOSEOUT_2026-08-18.md)
 >
 > Joomla legacy (`researchex.mju.ac.th/youth/`) is **content/reference evidence
 > only**. Its visual design is not a baseline and must not be copied.
