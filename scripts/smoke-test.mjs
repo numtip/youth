@@ -207,6 +207,14 @@ try {
   record('no external JS bundles', jsBundles.length === 0, `${jsBundles.length} js file(s)`);
   record('homepage has no external script src', !/<script[^>]+src=/i.test(thHome.html));
   record(
+    'back-to-top markup TH',
+    thHome.html.includes('class="back-to-top"') && thHome.html.includes('aria-label="กลับขึ้นด้านบน"'),
+  );
+  record(
+    'back-to-top markup EN',
+    enHome.html.includes('class="back-to-top"') && enHome.html.includes('aria-label="Back to top"'),
+  );
+  record(
     'gallery uses inline script only',
     thActivity.html.includes('gallery-story') &&
       thActivity.html.includes('gallery-lightbox') &&

@@ -513,6 +513,48 @@ main[tabindex='-1']:focus-visible {
   }
 }
 
+/* Back-to-top — fixed control; hidden until scroll threshold. */
+.back-to-top {
+  position: fixed;
+  z-index: 30;
+  bottom: max(1rem, calc(env(safe-area-inset-bottom, 0px) + 0.75rem));
+  right: max(1rem, calc(env(safe-area-inset-right, 0px) + 0.75rem));
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--color-emerald-600);
+  color: var(--color-stone-50);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+  transition:
+    opacity 200ms var(--ease-out-soft),
+    transform 200ms var(--ease-out-soft),
+    visibility 200ms;
+}
+
+.back-to-top--visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:focus-visible {
+  outline: 2px solid var(--color-emerald-300);
+  outline-offset: 2px;
+}
+
 /* WOW-V1 Phase C — gallery lightbox */
 .gallery-item {
   margin: 0;

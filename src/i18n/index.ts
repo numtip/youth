@@ -8,6 +8,7 @@ export interface Ui {
   siteName: string;
   siteTagline: string;
   skipToContent: string;
+  backToTop: string;
   nav: {
     home: string;
     primaryLabel: string;
@@ -57,6 +58,7 @@ export const ui: Record<Locale, Ui> = {
     siteName: 'ยุวชนอาสา มหาวิทยาลัยแม่โจ้',
     siteTagline: 'โครงการยุวชนอาสา มหาวิทยาลัยแม่โจ้ เพื่อการพัฒนาชุมชนท้องถิ่น',
     skipToContent: 'ข้ามไปยังเนื้อหา',
+    backToTop: 'กลับขึ้นด้านบน',
     nav: {
       home: 'หน้าแรก',
       primaryLabel: 'เมนูหลัก',
@@ -148,6 +150,7 @@ export const ui: Record<Locale, Ui> = {
     siteName: 'Youth Volunteers, Maejo University',
     siteTagline: 'Youth volunteer projects of Maejo University for local community development',
     skipToContent: 'Skip to content',
+    backToTop: 'Back to top',
     nav: {
       home: 'Home',
       primaryLabel: 'Main navigation',

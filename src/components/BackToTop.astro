@@ -1,0 +1,54 @@
+---
+import { getLocale, ui } from '../i18n';
+
+const locale = getLocale(Astro.currentLocale);
+const label = ui[locale].backToTop;
+---
+
+<button
+  type="button"
+  class="back-to-top"
+  aria-label={label}
+  aria-hidden="true"
+  tabindex="-1"
+>
+  <span aria-hidden="true">&uarr;</span>
+</button>
+
+<script is:inline>
+  (function () {
+    var btn = document.querySelector('.back-to-top:not([data-btt-init])');
+    if (!btn) return;
+    btn.setAttribute('data-btt-init', '');
+    var threshold = 600;
+    var visible = false;
+    var ticking = false;
+
+    function setVisible(show) {
+      if (visible === show) return;
+      visible = show;
+      btn.classList.toggle('back-to-top--visible', show);
+      btn.setAttribute('aria-hidden', show ? 'false' : 'true');
+      btn.tabIndex = show ? 0 : -1;
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        var y = window.scrollY || document.documentElement.scrollTop;
+        var lightboxOpen = document.querySelector('.gallery-lightbox[open]');
+        setVisible(y >= threshold && !lightboxOpen);
+      });
+    }
+
+    btn.addEventListener('click', function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'instant' : 'smooth' });
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
