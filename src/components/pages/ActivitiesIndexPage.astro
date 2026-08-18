@@ -16,6 +16,8 @@ for (const project of projects) {
   byYear.set(project.data.year, group);
 }
 
+const yearsDescending = [...byYear.entries()].sort(([a], [b]) => b - a);
+
 const crumbs = [
   { label: t.breadcrumbs.home, href: localeHref(locale, '') },
   { label: t.nav.activities },
@@ -34,30 +36,36 @@ const crumbs = [
           {t.activities.empty}
         </p>
       ) : (
-        <div class="mt-8 space-y-10">
-          {[...byYear.entries()].map(([year, yearProjects]) => (
-            <section>
-              <h2 class="mb-4 text-xl font-bold text-stone-800">
+        <ol class="year-timeline mt-8" aria-label={t.activities.journeyLabel}>
+          {yearsDescending.map(([year, yearProjects], index) => (
+            <li
+              class="year-timeline__item year-timeline__item--reveal"
+              style={`--year-timeline-delay: ${index * 100}ms`}
+            >
+              <h2 class="year-timeline__year">
                 {t.activities.year} {year}
               </h2>
-              <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {yearProjects.map((project) => {
-                  const { title, summary } = localizeEntry(locale, project.data);
-                  return (
-                    <ProjectCard
-                      title={title}
-                      summary={summary}
-                      cover={project.data.cover}
-                      alt={title}
-                      year={project.data.year}
-                      href={localeHref(locale, `activities/${project.data.year}/${project.data.slug}`)}
-                    />
-                  );
-                })}
+              <span class="year-timeline__node" aria-hidden="true"></span>
+              <div class="year-timeline__content">
+                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {yearProjects.map((project) => {
+                    const { title, summary } = localizeEntry(locale, project.data);
+                    return (
+                      <ProjectCard
+                        title={title}
+                        summary={summary}
+                        cover={project.data.cover}
+                        alt={title}
+                        year={project.data.year}
+                        href={localeHref(locale, `activities/${project.data.year}/${project.data.slug}`)}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-            </section>
+            </li>
           ))}
-        </div>
+        </ol>
       )
     }
   </div>

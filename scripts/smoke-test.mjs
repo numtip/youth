@@ -80,8 +80,22 @@ try {
   // TH routes
   await checkRoute('/', 'ยุวชนอาสา มหาวิทยาลัยแม่โจ้ เพื่อการพัฒนาชุมชน', 'TH /');
   await checkRoute('/activities/', 'กิจกรรมทั้งหมด', 'TH /activities/');
+  const thActivities = await fetchHtml('/activities/');
+  record(
+    'TH activities timeline',
+    thActivities.html.includes('year-timeline') &&
+      thActivities.html.includes('ปี 2569') &&
+      thActivities.html.includes('ปี 2564'),
+  );
   await checkRoute('/activities/2569/biochar-brand/', 'ยุวชนอาสาพัฒนาแบรนด์คนเอาถ่าน', 'TH /activities/2569/biochar-brand/');
+  const thProject = await fetchHtml('/activities/2569/biochar-brand/');
+  record('TH project story gallery', thProject.html.includes('gallery-story'));
   await checkRoute('/activities/2569/biochar-brand/activity-1/', 'ประชาสัมพันธ์และรับสมัครนักศึกษา', 'TH activity-1');
+  const thActivity = await fetchHtml('/activities/2569/biochar-brand/activity-1/');
+  record(
+    'TH activity gallery lightbox',
+    thActivity.html.includes('gallery-lightbox') && thActivity.html.includes('gallery-caption'),
+  );
   await checkRoute('/about/', 'เกี่ยวกับเรา', 'TH /about/');
   await checkRoute('/contact/', 'ติดต่อเรา', 'TH /contact/');
   await checkRoute('/documents/', 'เอกสารสาธารณะ', 'TH /documents/');
@@ -90,7 +104,16 @@ try {
   // EN routes
   await checkRoute('/en/', 'Youth Volunteers of Maejo University for Community Development', 'EN /en/');
   await checkRoute('/en/activities/', 'All activities', 'EN /en/activities/');
+  const enActivities = await fetchHtml('/en/activities/');
+  record(
+    'EN activities timeline',
+    enActivities.html.includes('year-timeline') &&
+      enActivities.html.includes('Year 2569') &&
+      enActivities.html.includes('Year 2564'),
+  );
   await checkRoute('/en/activities/2569/biochar-brand/', 'Youth Volunteers: Developing the Khon Ao Than brand', 'EN project');
+  const enProject = await fetchHtml('/en/activities/2569/biochar-brand/');
+  record('EN project story gallery', enProject.html.includes('gallery-story'));
   await checkRoute('/en/activities/2569/biochar-brand/activity-1/', 'Publicity and recruitment of students, along with a study of the Khon Ao Than Community Enterprise', 'EN activity-1');
   await checkRoute('/en/about/', 'About us', 'EN /en/about/');
   await checkRoute('/en/contact/', 'Contact us', 'EN /en/contact/');
@@ -145,6 +168,13 @@ try {
   const jsBundles = astroAssets.filter((f) => f.endsWith('.js'));
   record('no external JS bundles', jsBundles.length === 0, `${jsBundles.length} js file(s)`);
   record('homepage has no external script src', !/<script[^>]+src=/i.test(thHome.html));
+  record(
+    'gallery uses inline script only',
+    thActivity.html.includes('gallery-story') &&
+      thActivity.html.includes('gallery-lightbox') &&
+      /<script[^>]*>\s*\(function \(\)/.test(thActivity.html) &&
+      !thActivity.html.match(/<script[^>]+src=/i),
+  );
   record(
     'self-hosted Sarabun emitted',
     astroAssets.some((f) => /sarabun/i.test(f)),

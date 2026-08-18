@@ -30,9 +30,16 @@ export interface Ui {
       photos: string;
     };
   };
-  activities: { title: string; subtitle: string; year: string; empty: string };
+  activities: { title: string; subtitle: string; year: string; empty: string; journeyLabel: string };
   project: { activities: string; empty: string; back: string };
   activity: { details: string; gallery: string; sources: string; date: string; sequence: string; back: string };
+  gallery: {
+    dialogLabel: string;
+    view: string;
+    close: string;
+    prev: string;
+    next: string;
+  };
   documents: { title: string; subtitle: string; empty: string };
   about: { title: string; intro: string };
   contact: { title: string; intro: string };
@@ -79,6 +86,14 @@ export const ui: Record<Locale, Ui> = {
       subtitle: 'รวมโครงการและกิจกรรมยุวชนอาสา เรียงตามปีการศึกษา',
       year: 'ปี',
       empty: 'ยังไม่มีกิจกรรมที่เผยแพร่',
+      journeyLabel: 'เส้นทางโครงการตามปีการศึกษา',
+    },
+    gallery: {
+      dialogLabel: 'แกลเลอรีภาพ',
+      view: 'ดูภาพ',
+      close: 'ปิด',
+      prev: 'ภาพก่อนหน้า',
+      next: 'ภาพถัดไป',
     },
     project: {
       activities: 'กิจกรรมในโครงการ',
@@ -161,6 +176,14 @@ export const ui: Record<Locale, Ui> = {
       subtitle: 'All youth volunteer projects and activities, ordered by academic year',
       year: 'Year',
       empty: 'No published activities yet',
+      journeyLabel: 'Project journey by academic year',
+    },
+    gallery: {
+      dialogLabel: 'Photo gallery',
+      view: 'View photo',
+      close: 'Close',
+      prev: 'Previous photo',
+      next: 'Next photo',
     },
     project: {
       activities: 'Project activities',
