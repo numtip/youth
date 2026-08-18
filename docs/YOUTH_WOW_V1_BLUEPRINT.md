@@ -281,18 +281,21 @@ Measured on the Phase D QA exit (`SITE_BASE=/youth/ npm run build`, 2026-08-18):
 | Total static output | ≤ 100 MB after optimization | 218.5 MB (`dist`), 214.3 MB raw originals | FAIL (P2, gated) |
 | Max image per page (home/index) | ≤ 250 KB avg, ≤ 1 MB worst | 179.4 KB avg, 421.5 KB worst, 0 over 1 MB | PASS |
 | Max image per page (photo-dense project) | ≤ 250 KB avg, ≤ 1 MB worst | 245.9 KB avg, 1,419.2 KB worst, 7 over 1 MB | FAIL (P2, gated) |
-| CSS per page | ≤ 34 KB (34,816 B) | 33,183 B = 32.41 KB, 1 file, 1 `<link>` per page | PASS (1,633 B headroom) |
+| CSS per page | ≤ 34 KB (34,816 B) | 33,887 B = 33.09 KB at `base=/youth/` (33,851 B at `base=/`), 1 file, 1 `<link>` per page | PASS (929 B headroom) |
 | JS (external) per page | 0 | 0 `.js`/`.mjs` in `dist`, 0 `<script src=` in 154 pages | PASS |
 | HTML per page | ≤ 40 KB | 135 of 154 pages pass; 19 breach, worst 136,135 B | Deviation — see below |
 | `npm run build` time | ≤ 30 s | ~6.5 s (154 pages) | PASS |
 | Lighthouse mobile — TH home | LCP ≤ 2.5 s, CLS ≤ 0.1 | Perf 99–100, A11y 96, BP 96, SEO 100; LCP 1.7–1.9 s, CLS 0–0.003, TBT 0 ms | PASS |
 | Lighthouse mobile — TH activity + gallery | LCP ≤ 2.5 s, CLS ≤ 0.1 | Perf 95, A11y 94, BP 96, SEO 100; LCP 2.8 s, CLS 0, TBT 0 ms | LCP over by 0.3 s |
-| Smoke tests | pass | 41/41 at both `base=/` and `base=/youth/` | PASS |
+| Smoke tests | pass | 43/43 at both `base=/` and `base=/youth/` | PASS |
 
-Budgets enforced by the image audit script in CI; smoke test asserts no external
-JS is emitted. Lighthouse figures are real runs (LH 12.8.2, mobile form factor,
+The CSS ceiling is now **enforced**, not just documented: `scripts/smoke-test.mjs`
+asserts total emitted CSS ≤ 34,816 B and exactly one stylesheet link per page.
+That check exists because the first Phase D measurement was taken from a stale
+`dist` and under-reported CSS by 595 B. The image audit script enforces the media
+budgets. Lighthouse figures are real runs (LH 12.8.2, mobile form factor,
 simulated throttling) against the deployed site, which is a near-identical build
-of this commit.
+of the Phase C exit commit — they do not include the Phase D fixes.
 
 ### HTML budget deviation (Phase D — not a silent waiver)
 
@@ -330,7 +333,29 @@ comparably), and measured TBT stays at 0 ms because there is no external JS.
 | Skip link did not move focus in Safari | no `tabindex` on `<main>` | `tabindex="-1"`; focus lands on `<main>`, and `:focus-visible` does **not** match, so no page-wide outline |
 | Sticky header could cover fragment targets | no `scroll-padding-top` | `scroll-padding-top: 6rem` |
 | Four activity pages linked internal sources without the base path — 404 on GitHub Pages | `href="/activities/2569/biochar-brand"` on 8 pages | `href="/youth/activities/2569/biochar-brand"`; **0** unprefixed site-absolute refs across 154 pages |
-| Featured cover blew the ≤ 1 MB per-image budget on 3 high-traffic pages | `eco-tourism-route/cover.jpg` 1,483,995 B | WebP derivative 247.2 KB (−83%); homepage image payload 4,104.7 KB → 2,332.5 KB, worst 1,449.2 → 421.5 KB, images over 1 MB 1 → 0 |
+| Featured cover blew the ≤ 1 MB per-image budget on 3 high-traffic pages | `eco-tourism-route/cover.jpg` 1,483,995 B | WebP derivative 247.2 KB (−83%); homepage image payload 3,534.5 KB → 2,332.5 KB (−1,202.0 KB, −34.0%), worst 1,449.2 → 421.5 KB, images over 1 MB 1 → 0 |
+
+### Phase D P1 regressions caught by independent review
+
+Both were introduced by the Phase D fixes above and found by the release review,
+not by the original QA pass. Recorded because the first round asserted the
+opposite behaviour, and that assertion was wrong.
+
+| Regression | Why it happened | Evidence | Fix |
+| --- | --- | --- | --- |
+| The timeline rail collapsed to a 64.5 px stub below 480 px — the exact band the reflow was written for | `.year-timeline__item` declares no `grid-template-rows`, so `grid-row: 1 / -1` resolved `-1` to explicit-grid line 1 and spanned nothing | At 479 px EN the rail measured 64.5 px against 1,103 px needed to reach the next node (94% missing); TH 64.5 px against 1,055 px | `grid-row: 1 / span 2`; rail now measures 1,115 px (EN) and 1,067 px (TH) at 479 px, and 922 px against 910 px needed at 320 px |
+| `tabindex="-1"` on `<main>` made the skip link paint a 2 px emerald ring around the entire page | Chrome carries keyboard modality forward from the skip link, so `<main>` matched `:focus-visible` and picked up the global ring. The first QA pass tested with `skip.click()`, which does not set keyboard modality, and so measured `false` | With `:focus-visible` genuinely forced via CDP, `<main>` matched and the ring drew around a 1905 × 3034 px box | `main[tabindex='-1']:focus-visible { outline: none }`; forced-state check now reports `outline-style: none` |
+
+A third, smaller issue from the same review: the inset card ring's corners were
+being cut by the card's 12 px `overflow: hidden` curve, since the link itself had
+no radius. Added `border-radius: 0.625rem` to `.card-link:focus-visible`, giving
+a complete rounded ring (verified via forced `:focus-visible`).
+
+The review also found that `scripts/smoke-test.mjs` logged harness errors without
+recording a failure, so a preview-startup crash printed "0/0 smoke checks passed"
+and exited 0 — the gate every claim here rests on could report green while
+running nothing. Now records a failure and exits non-zero on both an exception
+and an empty result set.
 
 ### Phase D P2 debt (recorded, deliberately not fixed)
 
@@ -368,6 +393,27 @@ comparably), and measured TBT stays at 0 ms because there is no external JS.
     content modelling, pre-existing and outside WOW-V1 scope.
 12. **Internal `sources` links are base-prefixed but not locale-aware** — EN
     pages link to the TH project page. Correct and resolving, just not localized.
+13. **Backdrop click never closes the lightbox.** `.gallery-lightbox-panel` has
+    the same rect as the `<dialog>`, so `e.target === dialog` is never true and
+    the handler at `Gallery.astro:160-164` cannot fire. Pre-existing; Escape and
+    the close button both work, so this is a missing convenience rather than a
+    trap. Note the Phase D QA pass initially recorded this as working — that test
+    dispatched the click on the dialog element directly, which is not what a real
+    backdrop click does.
+14. **`scroll-padding-top: 6rem` (96 px) does not match the header** at most
+    widths: measured header height is 155 px (TH) / 175 px (EN) at 320 px, 131 px
+    at 375–480 px, 103 px at 640–768 px, and 61 px at 1280 px. It is a partial
+    mitigation, never a regression — too small on narrow screens, harmlessly
+    large on desktop. It also does nothing for the site's only fragment link,
+    since `#main-content` already sits at the top of the page; its real effect is
+    on tab-scroll-into-view. Make it responsive or drop it when the header layout
+    is next revisited.
+15. **`nav.home` is now unused** — the Header was its only consumer before the
+    landmark fix. Left in place rather than churning the `Ui` interface.
+16. **On 4 activity pages both reference links are the same dead
+    `/youth/index.php/...` path** (`aquatic-circular-economy/activity-1` and
+    `biochar-brand/activity-1`, TH + EN), so those pages have no working source
+    link at all. A sharper case of item 11, and still a content fix.
 
 ### CSS budget revision (Phase B — not a silent waiver)
 
