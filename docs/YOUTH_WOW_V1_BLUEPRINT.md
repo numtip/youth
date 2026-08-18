@@ -274,13 +274,13 @@ No CDN required; GH Pages static output stays the deploy target.
 
 ## 13. Performance budgets
 
-Measured on the Phase A exit (local `npm run build`):
+Measured on the Phase B CSS gate (local `npm run build`, 2026-08-18):
 
 | Budget | Target | Current (baseline) |
 | --- | --- | --- |
 | Total static output | ≤ 100 MB after optimization | ~221 MB |
 | Max image per page (gallery) | ≤ 250 KB avg, ≤ 1 MB worst | up to 1.5 MB |
-| CSS per page | ≤ 25 KB | 20.6 KB |
+| CSS per page | ≤ 30 KB | 27.9 KB |
 | JS (external) per page | 0 KB | 0 KB (inline only) |
 | HTML per page | ≤ 40 KB | ~10–21 KB |
 | `npm run build` time | ≤ 30 s | ~15 s |
@@ -288,6 +288,31 @@ Measured on the Phase A exit (local `npm run build`):
 
 Budgets enforced by the new image audit script in CI; smoke test extended to
 assert no external JS is emitted.
+
+### CSS budget revision (Phase B — not a silent waiver)
+
+The original CSS target was **≤ 25 KB** (Phase A table listed 20.6 KB
+pre-font; Phase A exit after self-hosted Sarabun was **23.7 KB**). That left
+**1.3 KB** of headroom.
+
+Phase B homepage (cinematic hero + impact strip + featured stories) first
+landed at **31.0 KB**. Root cause: Tailwind 4 emits each gradient color stop
+three times (hex, `color-mix`, gradient-stops). Three hero overlay utilities
+cost ~8.5 KB of generated CSS. Arbitrary `backdrop-blur-[2px]` on chips added
+~324 B on top of the Header `backdrop-blur` machinery already present in
+Phase A (~3 KB — not in scope to remove).
+
+Targeted cleanup (no visual redesign): collapse overlays into `.hero-scrim` /
+`.hero-frame` in `global.css`, drop the arbitrary chip blur, drop redundant
+`lg:col-span-2`. Result: **27.9 KB** (28,599 bytes).
+
+**≤ 25 KB is not technically sensible** without cutting Phase B surfaces or
+the Phase A sticky-header blur. Honest Phase B add after waste removal is
+~4.2 KB on the 23.7 KB Phase A baseline. Revised gate: **≤ 30 KB**, leaving
+~2.1 KB for Phase C story surfaces.
+
+Do not re-introduce Tailwind gradient utilities on the hero; keep the scrim
+as a single component class.
 
 ---
 

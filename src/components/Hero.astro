@@ -17,7 +17,7 @@ const photoWebp = withBase('/media/optimized/projects/2568/arabica-coffee/cover.
 ---
 
 <section
-  class="relative min-h-[32rem] overflow-hidden bg-emerald-900 text-white sm:min-h-[70vh]"
+  class="hero-frame relative overflow-hidden bg-emerald-900 text-white"
   aria-labelledby="hero-heading"
 >
   <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -37,21 +37,10 @@ const photoWebp = withBase('/media/optimized/projects/2568/arabica-coffee/cover.
     </picture>
   </div>
 
-  <div
-    class="pointer-events-none absolute inset-0 bg-gradient-to-b from-emerald-950/90 via-emerald-950/80 to-emerald-950/85"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-950/50 via-emerald-950/20 to-transparent"
-    aria-hidden="true"
-  ></div>
-  <div
-    class="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-emerald-950/90 to-transparent"
-    aria-hidden="true"
-  ></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
 
   <div
-    class="relative mx-auto flex min-h-[32rem] max-w-6xl flex-col px-4 pt-16 pb-20 sm:min-h-[70vh] sm:px-6 sm:pt-24 sm:pb-24"
+    class="hero-frame relative mx-auto flex max-w-6xl flex-col px-4 pt-16 pb-20 sm:px-6 sm:pt-24 sm:pb-24"
   >
     <div class="flex flex-1 flex-col justify-center">
       <p class="hero-enter mb-3 text-sm font-medium text-emerald-50">{tagline}</p>
@@ -79,7 +68,7 @@ const photoWebp = withBase('/media/optimized/projects/2568/arabica-coffee/cover.
           {chips.map((chip) => (
             <li>
               <span
-                class="inline-flex items-baseline gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 backdrop-blur-[2px]"
+                class="inline-flex items-baseline gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5"
                 aria-label={`${chip.value} ${chip.label}`}
               >
                 <span class="text-base font-bold tabular-nums sm:text-lg">{chip.value}</span>

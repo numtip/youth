@@ -229,8 +229,30 @@ body {
   }
 }
 
-/* WOW-V1 Phase B — cinematic hero motion. Class-based so the global
-   prefers-reduced-motion rule above disables Ken-Burns, entrance, and bounce. */
+/* WOW-V1 Phase B — cinematic hero. Frame/scrim live here so Tailwind does
+   not emit ~8 KB of per-stop gradient utilities (hex + color-mix + stops).
+   Scrim opacity is the contrast control: white / emerald-50 on this overlay
+   must stay ≥ 4.5:1 for normal text (WCAG AA). */
+.hero-frame {
+  min-height: 32rem;
+}
+
+@media (min-width: 640px) {
+  .hero-frame {
+    min-height: 70vh;
+  }
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: color-mix(in oklab, var(--color-emerald-950) 78%, transparent);
+  background-image:
+    linear-gradient(to top, color-mix(in oklab, var(--color-emerald-950) 70%, transparent), transparent 55%),
+    linear-gradient(to right, color-mix(in oklab, var(--color-emerald-950) 40%, transparent), transparent 70%);
+}
+
 @keyframes hero-ken-burns {
   from {
     transform: scale(1);

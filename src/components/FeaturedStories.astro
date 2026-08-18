@@ -16,7 +16,7 @@ const featured = (await getFeaturedProjects()).slice(0, 4);
         {featured.map((project, index) => {
           const { title, summary } = localizeEntry(locale, project.data);
           return (
-            <div class:list={['h-full', index === 0 && 'sm:col-span-2 lg:col-span-2']}>
+            <div class:list={['h-full', index === 0 && 'sm:col-span-2']}>
               <ProjectCard
                 featured
                 title={title}
